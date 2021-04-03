@@ -4,13 +4,13 @@ public class PC {
 	/**
 	 * Este atributo representa el contador
 	 */
-	private boolean CE;
+	private int CE;
 
-	public boolean isCE() {
+	public int isCE() {
 		return CE;
 	}
 
-	public void setCE(boolean cE) {
+	public void setCE(int cE) {
 		CE = cE;
 	}
 	
