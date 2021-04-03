@@ -1,16 +1,21 @@
 package logica;
 
-public class PC {
+public class PC extends Registro{
+	public PC(int numBits) {
+		super(numBits);
+		this.CE = false;
+	}
+
 	/**
 	 * Este atributo representa el contador
 	 */
-	private int CE;
+	private boolean CE;
 
-	public int isCE() {
+	public boolean isCE() {
 		return CE;
 	}
 
-	public void setCE(int cE) {
+	public void setCE(boolean cE) {
 		CE = cE;
 	}
 	
