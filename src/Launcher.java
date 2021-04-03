@@ -1,9 +1,16 @@
-
+import presentacion.Modelo;
 public class Launcher {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+    //Atributos
+    private Modelo miApp;
+    
+    //Metodos
+    public Launcher() {
+        miApp = new Modelo();
+        miApp.iniciar();        
+    }
+    
+    public static void main(String[] args) {
+        new Launcher();
+    }
+    
 }
