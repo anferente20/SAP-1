@@ -24,7 +24,8 @@ public class VistaRAM extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VistaRAM frame = new VistaRAM();
+					Modelo modelo1 = new Modelo();
+					VistaRAM frame = new VistaRAM(modelo1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
