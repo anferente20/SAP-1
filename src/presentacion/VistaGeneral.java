@@ -31,7 +31,7 @@ public class VistaGeneral extends JFrame {
 	/**
 	 * Este atributo establece la comunicación con el controlador correspondiente.
 	 */
-	private ControladorVistaGeneral control;
+	private ControlVistaGeneral control;
 	
 	/**
 	 * Este atributo establece la comunicación con el modelo.
@@ -43,7 +43,7 @@ public class VistaGeneral extends JFrame {
 	}
 	
 	
-	public ControladorVistaGeneral getControl() {
+	public ControlVistaGeneral getControl() {
 		return control;
 	}
 
