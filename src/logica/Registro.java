@@ -15,6 +15,9 @@ public class Registro {
 	public Registro(int numBits) {
 		this.numBits = numBits;
 		this.datos = new int[numBits];
+		for(int i=0;i<numBits;i++) {
+			this.datos[i] = 0;
+		}
 	}
 
 	public int getNumBits() {
@@ -33,6 +36,11 @@ public class Registro {
 		this.datos = datos;
 	}
 	
+	public void mostrarDatos() {
+		for(int i=0;i<this.numBits;i++) {
+			System.out.print(this.datos[i]);
+		}
+	}
 	
 	
 }

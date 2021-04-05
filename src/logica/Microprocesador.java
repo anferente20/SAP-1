@@ -138,6 +138,37 @@ public class Microprocesador {
 		this.cs = cs;
 	}
 	
+	/**
+	 * Este método obtiene la instrucción a ejecutar del programCounter
+	 * @return arreglo que indica la instrucción a ejecutar.
+	 */
+	public int[] getInstruccionPC() {
+		return this.programCounter.getInstruccion();
+	}
 	
+	/**
+	 * Este método permite asignarle una instruccion al registro MAR
+	 * @param instruccion Instruccion a registrar
+	 */
+	public void setInstruccionMAR(int[] instruccion) {
+		this.mar.setDatos(instruccion);
+		this.aumentarPC();
+	}
+	
+	/**
+	 * Este método permite aumentar el contador del Program Counter
+	 */
+	private void aumentarPC() {
+		this.programCounter.aumentar();
+	}
+	
+	/**
+	 * Este método busca una instrucción específica en la RAM y devuelve la instrucción específicada
+	 * @param ubicacion ubicacion a buscar la instruccion
+	 * @return instrucción almacenada en la RAM
+	 */
+	public int buscarInstruccioRAM(int[] ubicacion) {
+		return this.ram.buscarInstruccion(ubicacion);
+	}
 	
 }
