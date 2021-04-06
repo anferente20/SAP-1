@@ -3,12 +3,12 @@ package logica;
 public class Registro {
 	
 	/**
-	 * Este atributo indica el número de bits con los que se contaran en los registro.
+	 * Este atributo indica el número de bits con los que se contaran en el registro.
 	 */
 	private int numBits;
 	
 	/**
-	 * Este arreglo contendrá la información a ser procesada en la RAM
+	 * Este arreglo contiene la informacion proveniente de la RAM
 	 */
 	private int[] datos;
 			
@@ -41,6 +41,5 @@ public class Registro {
 			System.out.print(this.datos[i]);
 		}
 	}
-	
 	
 }
