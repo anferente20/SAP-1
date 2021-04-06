@@ -1,26 +1,98 @@
 package logica;
 
 public class ControlSecuencia {
-	
-	//A continuación se enuncian las interpretaciones de todas las operaciones con las que cuenta el SAP
-	private static int LDA = 0;
-	private static int ADD = 1;
-	private static int SUB = 2;
-	private static int STA = 3;
-	private static int LDI = 4;
-	private static int JMP = 5;
-	private static int JC = 6;
-	private static int JZ = 7;
-	private static int OUT = 8;
-	private static int HLT = 9;
 
 	/**
-	 * Este método permite traducir la instrucción de su componente númerico a la palabra en
-	 * lenguaje natural que se mostrará en el LED
+	 * Permite traducir la instruccion con representacion decimal
+	 * a la palabra en lenguaje natural
+	 * 
 	 * @param instruccion entero a traducir
 	 * @return String que corresponde a la palabra indicada
 	 */
 	public String traducir(int instruccion) {
-		return "";
+		String respuesta = "";
+		switch (instruccion) {
+		case 0:
+			respuesta = "LDA";
+			break;
+		case 1:
+			respuesta = "ADD";
+			break;
+		case 2:
+			respuesta = "SUB";
+			break;
+		case 3:
+			respuesta = "STA";
+			break;
+		case 4:
+			respuesta = "LDI";
+			break;
+		case 5:
+			respuesta = "JMP";
+			break;
+		case 6:
+			respuesta = "JC";
+			break;
+		case 7:
+			respuesta = "JZ";
+			break;
+		case 8:
+			respuesta = "OUT";
+			break;		
+		case 9:
+			respuesta = "HLT";
+			break;
+		default:
+			respuesta = "LDA";
+			break;
+		}
+		return respuesta;
+	}
+	
+	/**
+	 * Permite traducir la instruccion en lenguaje natural
+	 * a su representacion decimal
+	 * 
+	 * @param palabra indicada a traducir
+	 * @return int representacion decimal
+	 */
+	public int traducir(String instruccion) {
+		int respuesta = 0;
+		switch (instruccion) {		
+		case "LDA":
+			respuesta = 0;
+			break;
+		case "ADD":
+			respuesta = 1;
+			break;
+		case "SUB":
+			respuesta = 2;
+			break;
+		case "STA":
+			respuesta = 3;
+			break;
+		case "LDI":
+			respuesta = 4;
+			break;
+		case "JMP":
+			respuesta = 5;
+			break;
+		case "JC":
+			respuesta = 6;
+			break;
+		case "JZ":
+			respuesta = 7;
+			break;
+		case "OUT":
+			respuesta = 8;
+			break;		
+		case "HLT":
+			respuesta = 9;
+			break;
+		default:
+			respuesta = 0;
+			break;
+		}
+		return respuesta;
 	}
 }
