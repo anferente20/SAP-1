@@ -1,4 +1,4 @@
-	package logica;
+package logica;
 
 public class ALU {
 
@@ -38,13 +38,9 @@ public class ALU {
 	 * @param registroB Valor almacenado en el registro B
 	 * @return el entero resultante de la resta
 	 */
-	public int restar(int acumulador, int registroB) {
-		
-		int resultadoresta = 0;
-		
-		resultadoresta= acumulador + (~registroB + 1);
-		
-		
+	public int restar(int acumulador, int registroB) {		
+		int resultadoresta = 0;		
+		resultadoresta= acumulador + (~registroB + 1);				
 		return resultadoresta;
 	}
 }

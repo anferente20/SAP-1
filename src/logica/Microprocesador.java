@@ -51,7 +51,7 @@ public class Microprocesador {
 	public Microprocesador() {
 		super();
 		this.registroInstruccion = new Registro(8);
-		this.programCounter = new PC(0);
+		this.programCounter = new PC(4);
 		this.ram = new RAM(16);
 		this.mar = new Registro(4);
 		this.acumuladorA = new Registro(8);
@@ -125,13 +125,13 @@ public class Microprocesador {
 		// se modifican los datos en RI
 		this.registroInstruccion.setDatos(datos);
 		// se debe obtener la instruccion a realizar en la unidad de control		
-		rta[0] = toDecimal(datos,0,3);		
+		rta[0] = toDecimal(datos,0,3);	
 		// se debe identificar el dato que acompaña la instruccion		
 		rta[1] = toDecimal(datos,4,datos.length);
 		return rta;
 	}
 	
-	public int[] usaracumulador(int[] datos) {		
+	public int[] usarAcumulador(int[] datos) {		
 		int[] rtaacumulador = new int [2];
 		// se modifican los datos en RI
 		this.acumuladorA.setDatos(datos);
