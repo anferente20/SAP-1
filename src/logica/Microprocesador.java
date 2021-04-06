@@ -131,6 +131,17 @@ public class Microprocesador {
 		return rta;
 	}
 	
+	public int[] usaracumulador(int[] datos) {		
+		int[] rtaacumulador = new int [2];
+		// se modifican los datos en RI
+		this.acumuladorA.setDatos(datos);
+		// se debe obtener la instruccion a realizar en la unidad de control		
+		rtaacumulador[0] = toDecimal(datos,0,3);		
+		// se debe identificar el dato que acompaña la instruccion		
+		rtaacumulador[1] = toDecimal(datos,4,datos.length);
+		return rtaacumulador;
+	}
+	
 	/**
 	 * Permite convertir un arreglo de enteros {1,0}
 	 * en su representacion decimal
