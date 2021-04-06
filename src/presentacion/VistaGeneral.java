@@ -17,8 +17,9 @@ public class VistaGeneral extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
+				try {					
+					Modelo modelo1 = new Modelo();
+					VistaGeneral frame = new VistaGeneral(modelo1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +37,7 @@ public class VistaGeneral extends JFrame {
 	/**
 	 * Este atributo establece la comunicación con el modelo.
 	 */
-	private Modelo model;
+	private Modelo modelo;
 	
 	public void capturaEventos() {
 		
@@ -44,25 +45,30 @@ public class VistaGeneral extends JFrame {
 	
 	
 	public ControlVistaGeneral getControl() {
-		return control;
+		if(control == null){
+            control = new ControlVistaGeneral(this);
+        }
+        return control;
 	}
 
 
 	
-
-
 	/**
 	 * Create the frame.
 	 */
-	public VistaGeneral(ControlVistaGeneral control, Modelo model) {
-		this.control = control;
-		this.model = model;
+	public VistaGeneral(Modelo model) {		
+		this.modelo = model;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+	}
+
+
+	public Modelo getModelo() {		
+		return this.modelo;
 	}
 
 }
