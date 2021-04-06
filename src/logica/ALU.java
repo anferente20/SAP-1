@@ -42,7 +42,7 @@ public class ALU {
 		
 		int resultadoresta = 0;
 		
-		
+		resultadoresta= acumulador + (~registroB + 1);
 		
 		
 		return resultadoresta;
