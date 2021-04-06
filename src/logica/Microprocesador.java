@@ -116,6 +116,7 @@ public class Microprocesador {
 	 */
 	public int[] usarRI(int[] datos) {		
 		int[] rta = new int [2];
+		// se modifican los datos en RI
 		this.registroInstruccion.setDatos(datos);
 		// se debe obtener la instruccion a realizar en la unidad de control
 		String numero = "";
@@ -130,6 +131,25 @@ public class Microprocesador {
 		}		
 		rta[1] = Integer.parseInt(numero, 2);
 		return rta;
+	}
+	
+	/**
+	 * Permite convertir un arreglo de enteros {1,0}
+	 * en su representacion decimal
+	 * @param datos arreglo de datos binarios
+	 * @param inicio posicion del arreglo inicial
+	 * @param fin posicion del arreglo inicial
+	 * @return rta representacion decimal
+	 */
+	public int toDecimal(int[] datos, int inicio, int fin) {
+		String resultado = "";
+		if (fin>datos.length)
+			fin = datos.length;
+		
+		for (int i = inicio; i < fin; i++) {
+			resultado += datos[i];
+		}		
+		return Integer.parseInt(resultado, 2);
 	}
 
 }
