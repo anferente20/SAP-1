@@ -8,7 +8,7 @@ public class ALU {
 	 * @param registroB Valor almacenado en el registro B
 	 * @return el entero resultante de la suma
 	 */
-	public int sumar(int acumulador, int registroB) {
+	public int sumarBinario(int acumulador, int registroB) {
 		int resultadosuma = 0;
 		if (acumulador>=0 && registroB>=0) {
 			
@@ -38,9 +38,17 @@ public class ALU {
 	 * @param registroB Valor almacenado en el registro B
 	 * @return el entero resultante de la resta
 	 */
-	public int restar(int acumulador, int registroB) {		
+	public int restarBinario(int acumulador, int registroB) {		
 		int resultadoresta = 0;		
 		resultadoresta= acumulador + (~registroB + 1);				
 		return resultadoresta;
+	}
+	
+	public int sumar(int acumulador, int registroB) {
+		return acumulador+registroB;
+	}
+	
+	public int restar(int acumulador, int registroB) {
+		return acumulador-registroB;
 	}
 }

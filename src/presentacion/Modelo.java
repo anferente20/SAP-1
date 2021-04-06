@@ -28,7 +28,6 @@ public class Modelo implements Runnable {
 	}
 
 	// Métodos Punto de vista funcional
-
 	void crearNuevoTablero() {
 		if (!isAnimando()) {
 			sistema = null; // Liberar memoria para este objeto
