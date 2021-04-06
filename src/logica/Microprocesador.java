@@ -118,18 +118,10 @@ public class Microprocesador {
 		int[] rta = new int [2];
 		// se modifican los datos en RI
 		this.registroInstruccion.setDatos(datos);
-		// se debe obtener la instruccion a realizar en la unidad de control
-		String numero = "";
-		for (int i = 0; i < 4; i++) {
-			numero += datos[i];
-		}
-		rta[0] = Integer.parseInt(numero, 2);
-		numero = "";
-		// se debe identificar el dato que acompaña la instruccion
-		for (int i = 4; i < datos.length; i++) {
-			numero += datos[i];
-		}		
-		rta[1] = Integer.parseInt(numero, 2);
+		// se debe obtener la instruccion a realizar en la unidad de control		
+		rta[0] = toDecimal(datos,0,3);		
+		// se debe identificar el dato que acompaña la instruccion		
+		rta[1] = toDecimal(datos,4,datos.length);
 		return rta;
 	}
 	
@@ -137,16 +129,16 @@ public class Microprocesador {
 	 * Permite convertir un arreglo de enteros {1,0}
 	 * en su representacion decimal
 	 * @param datos arreglo de datos binarios
-	 * @param inicio posicion del arreglo inicial
-	 * @param fin posicion del arreglo inicial
+	 * @param inicio posicion inicial del arreglo
+	 * @param fin posicion final del arreglo
 	 * @return rta representacion decimal
 	 */
 	public int toDecimal(int[] datos, int inicio, int fin) {
 		String resultado = "";
-		if (fin>datos.length)
-			fin = datos.length;
-		
-		for (int i = inicio; i < fin; i++) {
+		if (fin>datos.length) {
+			fin = datos.length;			
+		}		
+		for (int i = inicio; i <= fin; i++) {
 			resultado += datos[i];
 		}		
 		return Integer.parseInt(resultado, 2);
