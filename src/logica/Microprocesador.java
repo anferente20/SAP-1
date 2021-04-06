@@ -42,6 +42,11 @@ public class Microprocesador {
 	 * Este atributo representa al Control de Secuencia del SAP
 	 */
 	private ControlSecuencia cs;
+	
+	/**
+	 * Este atributo representa el display led que se actualiza
+	 */
+	private int out;
 
 	public Microprocesador() {
 		super();
@@ -53,6 +58,7 @@ public class Microprocesador {
 		this.alu = new ALU();
 		this.registroB = new Registro(8);
 		this.cs = new ControlSecuencia();
+		this.out = 0;
 	}
 
 	/**
@@ -144,4 +150,41 @@ public class Microprocesador {
 		return Integer.parseInt(resultado, 2);
 	}
 
+	
+	// Metodos que permiten obtener el estado de cada componente
+	public Registro getRegistroInstruccion() {
+		return registroInstruccion;
+	}
+
+	public PC getProgramCounter() {
+		return programCounter;
+	}
+
+	public RAM getRam() {
+		return ram;
+	}
+
+	public Registro getMar() {
+		return mar;
+	}
+
+	public Registro getAcumuladorA() {
+		return acumuladorA;
+	}
+
+	public ALU getAlu() {
+		return alu;
+	}
+
+	public Registro getRegistroB() {
+		return registroB;
+	}
+
+	public ControlSecuencia getCs() {
+		return cs;
+	}
+
+	public int getOut() {
+		return out;
+	}	
 }
