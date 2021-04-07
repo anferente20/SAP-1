@@ -36,14 +36,14 @@ public class ControlSecuencia {
 		case 7:
 			respuesta = "JZ";
 			break;
-		case 8:
+		case 14:
 			respuesta = "OUT";
 			break;		
 		case 9:
 			respuesta = "HLT";
 			break;
 		default:
-			respuesta = "LDA";
+			respuesta = "HLT";
 			break;
 		}
 		return respuesta;

@@ -11,11 +11,11 @@ public class Modelo implements Runnable {
 	private VistaRAM ventanaRAM;
 	private Thread hiloDibujo;
 
-	// Métodos ocultación de información
+	// Mï¿½todos ocultaciï¿½n de informaciï¿½n
 
 	public Microprocesador getSistema() {
 		if (sistema == null) {
-			//sistema = new Microprocesador();
+			sistema = new Microprocesador();
 		}
 		return sistema;
 	}
@@ -27,7 +27,7 @@ public class Modelo implements Runnable {
 		return ventanaGeneral;
 	}
 
-	// Métodos Punto de vista funcional
+	// Mï¿½todos Punto de vista funcional
 	void crearNuevoTablero() {
 		if (!isAnimando()) {
 			sistema = null; // Liberar memoria para este objeto
@@ -58,7 +58,7 @@ public class Modelo implements Runnable {
 		System.gc();
 	}
 
-	// Métodos correspondientes a la lógica de presentación
+	// Mï¿½todos correspondientes a la lï¿½gica de presentaciï¿½n
 	private void animar() throws Exception {
 		animando = true;
 	}
@@ -107,5 +107,48 @@ public class Modelo implements Runnable {
 	 * */
 	public void controlarVelocidad() {
 		//setVelocidad(110 - getVentanaGeneral().getSliVelocidad().getValue());
+	}
+	
+	public void ciclo() {
+		this.getSistema();
+		sistema.cargarPrograma();
+		//asigna la instruccion al mar
+		sistema.setInstruccionMAR(sistema.getInstruccionPC());
+		sistema.aumentarPC();
+		//Busca la posiciÃ³n en la ram
+		int[] instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
+		//Asigna la instruccion a IR
+		String palabra = sistema.traducir(sistema.toDecimal(sistema.usarRI(instruccion,1), 0, 3));
+		System.out.println(" PALABRA: "+palabra);
+		int[] registro = sistema.usarRI(instruccion,2);
+		
+		switch(palabra) {
+			case "LDA":
+				//Asigna la instruccion al MAR
+				sistema.setInstruccionMAR(registro);
+				//Busca la posiciÃ³n en la ram
+				instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());	
+				sistema.asignarAcumuladorA(instruccion);
+				break;
+			case "ADD":
+				sistema.setInstruccionMAR(registro);
+				//Busca la posiciÃ³n en la ram
+				instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());	
+				sistema.asignarRegistroB(instruccion);
+				int suma = sistema.sumarDecimal(sistema.valorDecimalAcumulador(),sistema.valorDecimalRegistro());
+				sistema.asignarAcumuladorA(sistema.toBinario(suma, 8));
+				break;
+			case "SUB":
+				sistema.setInstruccionMAR(registro);
+				//Busca la posiciÃ³n en la ram
+				instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());	
+				sistema.asignarRegistroB(instruccion);
+				int resta = sistema.restarDecimal(sistema.valorDecimalAcumulador(),sistema.valorDecimalRegistro());
+				sistema.asignarAcumuladorA(sistema.toBinario(resta, 8));
+				break;
+			case "OUT":
+				System.out.println("El resultado es: "+sistema.valorDecimalAcumulador());
+				break;
+		}		
 	}
 }

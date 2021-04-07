@@ -52,7 +52,7 @@ public class Microprocesador {
 		super();
 		this.registroInstruccion = new Registro(8);
 		this.programCounter = new PC(4);
-		this.ram = new RAM(16);
+		this.ram = new RAM(16,8);
 		this.mar = new Registro(4);
 		this.acumuladorA = new Registro(8);
 		this.alu = new ALU();
@@ -65,7 +65,7 @@ public class Microprocesador {
 	 * Este m√©todo permite cargar un programa en la RAM
 	 */
 	public void cargarPrograma() {
-
+		this.ram.cargarProgramaDefecto();
 	}
 
 	/**
@@ -92,13 +92,12 @@ public class Microprocesador {
 	 */
 	public void setInstruccionMAR(int[] instruccion) {
 		this.mar.setDatos(instruccion);
-		this.aumentarPC();
 	}
 
 	/**
 	 * Este m√©todo permite aumentar el contador del Program Counter
 	 */
-	private void aumentarPC() {
+	public void aumentarPC() {
 		this.programCounter.aumentar();
 	}
 
@@ -109,7 +108,7 @@ public class Microprocesador {
 	 * @param ubicacion ubicacion a buscar la instruccion
 	 * @return instrucci√≥n almacenada en la RAM
 	 */
-	public int buscarInstruccioRAM(int[] ubicacion) {
+	public int[] buscarInstruccioRAM(int[] ubicacion) {
 		return this.ram.buscarInstruccion(ubicacion);
 	}
 
@@ -120,27 +119,70 @@ public class Microprocesador {
 	 * @param datos arreglo de datos binarios
 	 * @return rta instruccion y dato
 	 */
-	public int[] usarRI(int[] datos) {		
-		int[] rta = new int [2];
-		// se modifican los datos en RI
-		this.registroInstruccion.setDatos(datos);
-		// se debe obtener la instruccion a realizar en la unidad de control		
-		rta[0] = toDecimal(datos,0,3);	
-		// se debe identificar el dato que acompaÒa la instruccion		
-		rta[1] = toDecimal(datos,4,datos.length);
+	public int[] usarRI(int[] datos, int pos) {		
+		int[] rta = new int [4];
+		if(pos == 1) {
+			for(int i = 0;i<4;i++) {
+				rta[i]  = datos[i]; 
+			}
+		}else {
+			int contador = 0;
+			for(int i = 4;i<8;i++) {
+				rta[contador]  = datos[i]; 
+				contador++;
+			}
+		}
 		return rta;
 	}
-	
-	public int[] usarAcumulador(int[] datos) {		
-		int[] rtaacumulador = new int [2];
-		// se modifican los datos en RI
-		this.acumuladorA.setDatos(datos);
-		// se debe obtener la instruccion a realizar en la unidad de control		
-		rtaacumulador[0] = toDecimal(datos,0,3);		
-		// se debe identificar el dato que acompaÒa la instruccion		
-		rtaacumulador[1] = toDecimal(datos,4,datos.length);
-		return rtaacumulador;
+	public  int[] toBinario(int valor, int tamano) {
+        int[] binario = new int[tamano];
+        for(int i =0;i<tamano;i++){
+            binario[i]=0;
+        }
+		String bin = Integer.toBinaryString(valor);
+		String[] chaBin = bin.split("");
+		int contador=0;
+		for(int i = tamano-chaBin.length;i<tamano;i++) {
+			binario[i] = Integer.valueOf(chaBin[contador]);
+			contador++;
+		}
+		return binario;
 	}
+	public int sumarDecimal(int acumulador, int registroB) {
+		return this.alu.sumar(acumulador, registroB);
+	}
+	
+	public int restarDecimal(int acumulador, int registroB) {
+		return this.alu.restar(acumulador, registroB);
+	}
+	
+	public int valorDecimalAcumulador() {
+		return toDecimal(this.acumuladorA.getDatos(),0,this.acumuladorA.getNumBits()-1);
+	}
+	public int valorDecimalRegistro() {
+		return toDecimal(this.registroB.getDatos(),0,this.registroB.getNumBits()-1);
+	}
+	
+	public void asignarAcumuladorA(int[] numero) {
+		this.acumuladorA.setDatos(numero);
+	}
+	
+	public int[] obtenerValorAcumulador() {
+		return this.acumuladorA.getDatos();
+	}
+	
+	public void asignarRegistroB(int[] numero) {
+		this.registroB.setDatos(numero);
+	}
+	
+	public int[] obtenerValorRegistroB() {
+		return this.registroB.getDatos();
+	}
+	
+	public String traducir(int instruccion) {
+		return this.cs.traducir(instruccion);
+	}
+	
 	
 	/**
 	 * Permite convertir un arreglo de enteros {1,0}
@@ -197,5 +239,7 @@ public class Microprocesador {
 
 	public int getOut() {
 		return out;
-	}	
+	}
+
+		
 }
