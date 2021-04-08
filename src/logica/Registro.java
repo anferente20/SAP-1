@@ -33,7 +33,15 @@ public class Registro {
 	}
 
 	public void setDatos(int[] datos) {
-		this.datos = datos;
+		if(datos.length == 4 && this.datos.length!= 4) {
+			int contador = 0;
+			for(int i=4;i<8;i++) {
+				this.datos[i] = datos[contador];
+				contador++;
+			}
+		}else {
+			this.datos = datos;
+		}
 	}
 	
 	public void mostrarDatos() {

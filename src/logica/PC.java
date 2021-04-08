@@ -27,6 +27,7 @@ public class PC extends Registro{
 		return this.getDatos();
 	}
 	
+	
 	/**
 	 * Este método permite aumentar la el CE de tal manera que se registre el paso en el que se va
 	 */
@@ -66,6 +67,8 @@ public class PC extends Registro{
 		}
 		this.setDatos(aux);
 	}
+
+	
 	
 	
 }

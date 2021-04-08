@@ -12,39 +12,37 @@ public class ControlSecuencia {
 	public String traducir(int instruccion) {
 		String respuesta = "";
 		switch (instruccion) {
-		case 0:
+		case 1:
 			respuesta = "LDA";
 			break;
-		case 1:
+		case 2:
 			respuesta = "ADD";
 			break;
-		case 2:
+		case 3:
 			respuesta = "SUB";
 			break;
-		case 3:
+		case 4:
 			respuesta = "STA";
 			break;
-		case 4:
+		case 5:
 			respuesta = "LDI";
 			break;
-		case 5:
+		case 6:
 			respuesta = "JMP";
 			break;
-		case 6:
+		case 7:
 			respuesta = "JC";
 			break;
-		case 7:
+		case 8:
 			respuesta = "JZ";
 			break;
 		case 14:
 			respuesta = "OUT";
 			break;		
-		case 9:
+		case 15:
 			respuesta = "HLT";
 			break;
-		default:
-			respuesta = "HLT";
-			break;
+		
 		}
 		return respuesta;
 	}

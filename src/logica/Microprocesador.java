@@ -64,8 +64,8 @@ public class Microprocesador {
 	/**
 	 * Este método permite cargar un programa en la RAM
 	 */
-	public void cargarPrograma() {
-		this.ram.cargarProgramaDefecto();
+	public void cargarPrograma(int programa) {
+		this.ram.cargarProgramaDefecto(programa);
 	}
 
 	/**
@@ -148,6 +148,10 @@ public class Microprocesador {
 		}
 		return binario;
 	}
+	
+	public void printRAM() {
+		this.ram.mostrarDatos();
+	}
 	public int sumarDecimal(int acumulador, int registroB) {
 		return this.alu.sumar(acumulador, registroB);
 	}
@@ -167,6 +171,9 @@ public class Microprocesador {
 		this.acumuladorA.setDatos(numero);
 	}
 	
+	public void asignarPC(int[] posicion) {
+		this.programCounter.setDatos(posicion);
+	}
 	public int[] obtenerValorAcumulador() {
 		return this.acumuladorA.getDatos();
 	}
@@ -181,6 +188,10 @@ public class Microprocesador {
 	
 	public String traducir(int instruccion) {
 		return this.cs.traducir(instruccion);
+	}
+	
+	public void setRegistroRAM(int posicion, int[] instruccion) {
+		this.ram.setRegistro(posicion, instruccion);
 	}
 	
 	
