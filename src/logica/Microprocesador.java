@@ -42,7 +42,7 @@ public class Microprocesador {
 	 * Este atributo representa al Control de Secuencia del SAP
 	 */
 	private ControlSecuencia cs;
-	
+
 	/**
 	 * Este atributo representa el display led que se actualiza
 	 */
@@ -52,7 +52,7 @@ public class Microprocesador {
 		super();
 		this.registroInstruccion = new Registro(8);
 		this.programCounter = new PC(4);
-		this.ram = new RAM(16,8);
+		this.ram = new RAM(16, 8);
 		this.mar = new Registro(4);
 		this.acumuladorA = new Registro(8);
 		this.alu = new ALU();
@@ -119,102 +119,122 @@ public class Microprocesador {
 	 * @param datos arreglo de datos binarios
 	 * @return rta instruccion y dato
 	 */
-	public int[] usarRI(int[] datos, int pos) {		
-		int[] rta = new int [4];
-		if(pos == 1) {
-			for(int i = 0;i<4;i++) {
-				rta[i]  = datos[i]; 
+	public int[] usarRI(int[] datos, int pos) {
+		int[] rta = new int[4];
+		if (pos == 1) {
+			for (int i = 0; i < 4; i++) {
+				rta[i] = datos[i];
 			}
-		}else {
+		} else {
 			int contador = 0;
-			for(int i = 4;i<8;i++) {
-				rta[contador]  = datos[i]; 
+			for (int i = 4; i < 8; i++) {
+				rta[contador] = datos[i];
 				contador++;
 			}
 		}
 		return rta;
 	}
-	public  int[] toBinario(int valor, int tamano) {
-        int[] binario = new int[tamano];
-        for(int i =0;i<tamano;i++){
-            binario[i]=0;
-        }
-		String bin = Integer.toBinaryString(valor);
-		String[] chaBin = bin.split("");
-		int contador=0;
-		for(int i = tamano-chaBin.length;i<tamano;i++) {
-			binario[i] = Integer.valueOf(chaBin[contador]);
-			contador++;
+
+	public int[] toBinario(int valor, int tamano) {
+		int[] binario = new int[tamano];
+		String bin = "";
+		for (int i = 0; i < tamano; i++) {
+			binario[i] = 0;
 		}
+		if (tamano == 8 && valor < 0) {
+			bin = Integer.toBinaryString(Math.abs(valor));
+			String[] arrayBin = bin.split("");
+			int contador = 0;			
+			for (int i = tamano - arrayBin.length; i < tamano; i++) {
+				binario[i] = Integer.valueOf(arrayBin[contador]);
+				contador++;
+			}
+			binario[0] =1;
+		} else {
+			bin = Integer.toBinaryString(Math.abs(valor));
+			String[] arrayBin = bin.split("");
+			int contador = 0;
+			for (int i = tamano - arrayBin.length; i < tamano; i++) {
+				binario[i] = Integer.valueOf(arrayBin[contador]);
+				contador++;
+			}
+		}
+
 		return binario;
 	}
-	
+
 	public void printRAM() {
 		this.ram.mostrarDatos();
 	}
+
 	public int sumarDecimal(int acumulador, int registroB) {
 		return this.alu.sumar(acumulador, registroB);
 	}
-	
+
 	public int restarDecimal(int acumulador, int registroB) {
 		return this.alu.restar(acumulador, registroB);
 	}
-	
+
 	public int valorDecimalAcumulador() {
-		return toDecimal(this.acumuladorA.getDatos(),0,this.acumuladorA.getNumBits()-1);
+		return toDecimal(this.acumuladorA.getDatos(), 0, this.acumuladorA.getNumBits() - 1);
 	}
+
 	public int valorDecimalRegistro() {
-		return toDecimal(this.registroB.getDatos(),0,this.registroB.getNumBits()-1);
+		return toDecimal(this.registroB.getDatos(), 0, this.registroB.getNumBits() - 1);
 	}
-	
+
 	public void asignarAcumuladorA(int[] numero) {
 		this.acumuladorA.setDatos(numero);
 	}
-	
+
 	public void asignarPC(int[] posicion) {
 		this.programCounter.setDatos(posicion);
 	}
+
 	public int[] obtenerValorAcumulador() {
 		return this.acumuladorA.getDatos();
 	}
-	
+
 	public void asignarRegistroB(int[] numero) {
 		this.registroB.setDatos(numero);
 	}
-	
+
 	public int[] obtenerValorRegistroB() {
 		return this.registroB.getDatos();
 	}
-	
+
 	public String traducir(int instruccion) {
 		return this.cs.traducir(instruccion);
 	}
-	
+
 	public void setRegistroRAM(int posicion, int[] instruccion) {
 		this.ram.setRegistro(posicion, instruccion);
 	}
-	
-	
+
 	/**
-	 * Permite convertir un arreglo de enteros {1,0}
-	 * en su representacion decimal
-	 * @param datos arreglo de datos binarios
+	 * Permite convertir un arreglo de enteros {1,0} en su representacion decimal
+	 * 
+	 * @param datos  arreglo de datos binarios
 	 * @param inicio posicion inicial del arreglo
-	 * @param fin posicion final del arreglo
+	 * @param fin    posicion final del arreglo
 	 * @return rta representacion decimal
 	 */
 	public int toDecimal(int[] datos, int inicio, int fin) {
 		String resultado = "";
-		if (fin>datos.length) {
-			fin = datos.length;			
+		if (fin > datos.length) {
+			fin = datos.length;
 		}		
 		for (int i = inicio; i <= fin; i++) {
 			resultado += datos[i];
-		}		
-		return Integer.parseInt(resultado, 2);
+		}
+		if(datos.length == 8 && datos[0] == 1) {
+			return -Integer.parseInt(resultado, 2);	
+		}else {
+			return Integer.parseInt(resultado, 2);
+		}
+		
 	}
 
-	
 	// Metodos que permiten obtener el estado de cada componente
 	public Registro getRegistroInstruccion() {
 		return registroInstruccion;
@@ -252,5 +272,4 @@ public class Microprocesador {
 		return out;
 	}
 
-		
 }

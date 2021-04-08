@@ -136,16 +136,16 @@ public class Modelo implements Runnable {
 				instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());	
 				sistema.asignarRegistroB(instruccion);
 				int suma = sistema.sumarDecimal(sistema.valorDecimalAcumulador(),sistema.valorDecimalRegistro());
-				System.out.println(suma);
-				sistema.asignarAcumuladorA(sistema.toBinario(suma, 8));
+				System.out.println(suma);				
+				sistema.asignarAcumuladorA(sistema.toBinario(suma, 8));					
 				break;
 			case "SUB":
 				sistema.setInstruccionMAR(datoRegistro);
 				//Busca la posición en la ram
 				instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());	
 				sistema.asignarRegistroB(instruccion);
-				int resta = sistema.restarDecimal(sistema.valorDecimalAcumulador(),sistema.valorDecimalRegistro());
-				sistema.asignarAcumuladorA(sistema.toBinario(resta, 8));
+				int resta = sistema.restarDecimal(sistema.valorDecimalAcumulador(),sistema.valorDecimalRegistro());				
+				sistema.asignarAcumuladorA(sistema.toBinario(resta, 8));									
 				break;
 			case "STA":
 				sistema.setInstruccionMAR(datoRegistro);
@@ -162,7 +162,7 @@ public class Modelo implements Runnable {
 				sistema.asignarPC(datoRegistro);
 				break;
 			case "JC":
-				if(sistema.valorDecimalAcumulador()>0) {
+				if(sistema.valorDecimalAcumulador()>=0) {
 					sistema.asignarPC(datoRegistro);
 				}
 				break;

@@ -8,8 +8,7 @@ public class Prueba {
 		String palabra = "";
 		model.getSistema();
 		model.cargarProgramaDefecto(2);
-		while(!palabra.equals("HLT")){
-			
+		while(!palabra.equals("HLT")){			
 			palabra = model.ciclo();
 		}
 	}

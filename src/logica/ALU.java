@@ -45,10 +45,21 @@ public class ALU {
 	}
 	
 	public int sumar(int acumulador, int registroB) {
-		return acumulador+registroB;
+		int suma = acumulador+registroB;
+		if (suma >=-255 && suma <=127) {
+			return suma;	
+		}else {
+			return 0;
+		}
+		
 	}
 	
 	public int restar(int acumulador, int registroB) {
-		return acumulador-registroB;
+		int resta = acumulador-registroB;
+		if (resta >=-255 && resta <=127) {
+			return resta;	
+		}else {
+			return 0;
+		}		
 	}
 }
