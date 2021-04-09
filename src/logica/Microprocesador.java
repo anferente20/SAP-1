@@ -60,6 +60,71 @@ public class Microprocesador {
 		this.cs = new ControlSecuencia();
 		this.out = 0;
 	}
+	
+	/**
+	 * Permite convertir un decimal en un arreglo de enteros {1,0} en representacion
+	 * binaria
+	 * 
+	 * @param valor numero decimal
+	 * @param tamano tamaño del arreglo resultante
+	 * @return rta representacion binaria en arreglo
+	 */
+	public int[] toBinario(int valor, int tamano) {
+		int[] binario = new int[tamano];
+		String bin = "";
+		for (int i = 0; i < tamano; i++) {
+			binario[i] = 0;
+		}
+		if (tamano == 8 && valor < 0) {
+			bin = Integer.toBinaryString(Math.abs(valor));
+			String[] arrayBin = bin.split("");
+			int contador = 0;			
+			for (int i = tamano - arrayBin.length; i < tamano; i++) {
+				binario[i] = Integer.valueOf(arrayBin[contador]);
+				contador++;
+			}
+			binario[0] =1;
+		} else {
+			bin = Integer.toBinaryString(Math.abs(valor));
+			String[] arrayBin = bin.split("");
+			int contador = 0;
+			for (int i = tamano - arrayBin.length; i < tamano; i++) {
+				binario[i] = Integer.valueOf(arrayBin[contador]);
+				contador++;
+			}
+		}
+
+		return binario;
+	}
+	
+	/**
+	 * Permite convertir un arreglo de enteros {1,0} en su representacion decimal
+	 * 
+	 * @param datos  arreglo de datos binarios
+	 * @param inicio posicion inicial del arreglo
+	 * @param fin    posicion final del arreglo
+	 * @return rta representacion decimal
+	 */
+	public int toDecimal(int[] datos, int inicio, int fin) {
+		String resultado = "";
+		if (fin > datos.length) {
+			fin = datos.length;
+		}				
+		if(datos.length == 8 && datos[0] == 1) {
+			datos[0] = 0;
+			for (int i = inicio; i <= fin; i++) {
+				resultado += datos[i];
+			}
+			return -Integer.parseInt(resultado, 2);			
+		}else {
+			for (int i = inicio; i <= fin; i++) {
+				resultado += datos[i];
+			}
+			return Integer.parseInt(resultado, 2);
+		}
+		
+	}
+
 
 	/**
 	 * Este mÃ©todo permite cargar un programa en la RAM
@@ -134,35 +199,8 @@ public class Microprocesador {
 		}
 		return rta;
 	}
-
-	public int[] toBinario(int valor, int tamano) {
-		int[] binario = new int[tamano];
-		String bin = "";
-		for (int i = 0; i < tamano; i++) {
-			binario[i] = 0;
-		}
-		if (tamano == 8 && valor < 0) {
-			bin = Integer.toBinaryString(Math.abs(valor));
-			String[] arrayBin = bin.split("");
-			int contador = 0;			
-			for (int i = tamano - arrayBin.length; i < tamano; i++) {
-				binario[i] = Integer.valueOf(arrayBin[contador]);
-				contador++;
-			}
-			binario[0] =1;
-		} else {
-			bin = Integer.toBinaryString(Math.abs(valor));
-			String[] arrayBin = bin.split("");
-			int contador = 0;
-			for (int i = tamano - arrayBin.length; i < tamano; i++) {
-				binario[i] = Integer.valueOf(arrayBin[contador]);
-				contador++;
-			}
-		}
-
-		return binario;
-	}
-
+	
+	// otros metodos de acceso a funciones de los componentes
 	public void printRAM() {
 		this.ram.mostrarDatos();
 	}
@@ -211,30 +249,7 @@ public class Microprocesador {
 		this.ram.setRegistro(posicion, instruccion);
 	}
 
-	/**
-	 * Permite convertir un arreglo de enteros {1,0} en su representacion decimal
-	 * 
-	 * @param datos  arreglo de datos binarios
-	 * @param inicio posicion inicial del arreglo
-	 * @param fin    posicion final del arreglo
-	 * @return rta representacion decimal
-	 */
-	public int toDecimal(int[] datos, int inicio, int fin) {
-		String resultado = "";
-		if (fin > datos.length) {
-			fin = datos.length;
-		}		
-		for (int i = inicio; i <= fin; i++) {
-			resultado += datos[i];
-		}
-		if(datos.length == 8 && datos[0] == 1) {
-			return -Integer.parseInt(resultado, 2);	
-		}else {
-			return Integer.parseInt(resultado, 2);
-		}
-		
-	}
-
+	
 	// Metodos que permiten obtener el estado de cada componente
 	public Registro getRegistroInstruccion() {
 		return registroInstruccion;
