@@ -179,6 +179,7 @@ public class Modelo implements Runnable {
 			case "HLT":
 				break;
 			case "OUT":
+				sistema.setOut(sistema.valorDecimalAcumulador());
 				System.out.println("El resultado es: "+sistema.valorDecimalAcumulador());
 				break;
 		}
