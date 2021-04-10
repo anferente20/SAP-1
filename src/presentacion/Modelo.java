@@ -43,6 +43,7 @@ public class Modelo implements Runnable {
 
 	public void iniciarAnimacion() {
 		setVelocidad(110 - getVentanaGeneral().getSlider().getValue());
+		System.out.println(110 - getVentanaGeneral().getSlider().getValue());
 		getVentanaGeneral().getBtnPlay().setEnabled(false);
 		getVentanaGeneral().getBtnPausar().setEnabled(true);
 		hiloDibujo = new Thread(this);
@@ -63,12 +64,11 @@ public class Modelo implements Runnable {
 		String palabra = "";
 		getSistema();
 		cargarProgramaDefecto(1);
-		palabra = ciclo();
-		/*			
+					
 		while (!palabra.equals("HLT")) {
 			palabra = ciclo();
 		}
-		*/
+		
 
 	}
 
@@ -126,6 +126,9 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getLblOUT().setText("");
 	}
 
+	public int getVelocidad() {
+		return this.getSistema().getVelocidad();
+	}
 	/**
 	 * Controla la velocidad de la animacion con el slider de la vista general
 	 */
@@ -140,42 +143,53 @@ public class Modelo implements Runnable {
 	public String ciclo() {
 		// asigna la instruccion al mar
 		sistema.setInstruccionMAR(sistema.getInstruccionPC());
+		this.esperar(this.getVelocidad());
 		sistema.aumentarPC();
+		this.esperar(this.getVelocidad());
 		// Busca la posición en la ram
 		int[] instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
+		this.esperar(this.getVelocidad());
 		// Asigna la instruccion a IR
 		String palabra = sistema.traducir(sistema.toDecimal(sistema.usarRI(instruccion, 1), 0, 3));
+		this.esperar(this.getVelocidad());
 		int[] datoRegistro = sistema.usarRI(instruccion, 2);
+		this.esperar(this.getVelocidad());
 		switch (palabra) {
 		case "LDA":
 			// Asigna la instruccion al MAR
 			sistema.setInstruccionMAR(datoRegistro);
+			this.esperar(this.getVelocidad());
 			// Busca la posición en la ram
 			instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
-			System.out.print("LDA: ");
-			for (int i : datoRegistro) {
-				System.out.print(i);
-			}
-			System.out.println("");
+			this.esperar(this.getVelocidad());
 			sistema.asignarAcumuladorA(instruccion);
+			this.esperar(this.getVelocidad());
 			break;
 		case "ADD":
 			sistema.setInstruccionMAR(datoRegistro);
+			this.esperar(this.getVelocidad());
 			// Busca la posición en la ram
 			instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
+			this.esperar(this.getVelocidad());
 			sistema.asignarRegistroB(instruccion);
+			this.esperar(this.getVelocidad());
 			int suma = sistema.sumarDecimal(sistema.valorDecimalAcumulador(), sistema.valorDecimalRegistro());
-			System.out.println("resultado ADD: " + suma);
+			this.esperar(this.getVelocidad());
 			sistema.asignarAcumuladorA(sistema.toBinario(suma, 8));
+			this.esperar(this.getVelocidad());
 			break;
 		case "SUB":
 			sistema.setInstruccionMAR(datoRegistro);
+			this.esperar(this.getVelocidad());
 			// Busca la posición en la ram
 			instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
+			this.esperar(this.getVelocidad());
 			sistema.asignarRegistroB(instruccion);
+			this.esperar(this.getVelocidad());
 			int resta = sistema.restarDecimal(sistema.valorDecimalAcumulador(), sistema.valorDecimalRegistro());
-			System.out.println("resultado SUB: " + resta);
+			this.esperar(this.getVelocidad());
 			sistema.asignarAcumuladorA(sistema.toBinario(resta, 8));
+			this.esperar(this.getVelocidad());
 			break;
 		case "STA":
 			sistema.setInstruccionMAR(datoRegistro);
@@ -186,25 +200,31 @@ public class Modelo implements Runnable {
 		case "LDI":
 			// Asigna la instruccion al MAR
 			sistema.setInstruccionMAR(datoRegistro);
+			this.esperar(this.getVelocidad());
 			sistema.asignarAcumuladorA(datoRegistro);
+			this.esperar(this.getVelocidad());
 			break;
 		case "JMP":
 			sistema.asignarPC(datoRegistro);
+			this.esperar(this.getVelocidad());
 			break;
 		case "JC":
 			if (sistema.valorDecimalAcumulador() >= 0) {
 				sistema.asignarPC(datoRegistro);
+				this.esperar(this.getVelocidad());
 			}
 			break;
 		case "JZ":
 			if (sistema.valorDecimalAcumulador() == 0) {
 				sistema.asignarPC(datoRegistro);
+				this.esperar(this.getVelocidad());
 			}
 			break;
 		case "HLT":
 			break;
 		case "OUT":
 			sistema.setOut(sistema.valorDecimalAcumulador());
+			this.esperar(this.getVelocidad());
 			System.out.println("El resultado es: " + sistema.valorDecimalAcumulador());
 			break;
 		}
