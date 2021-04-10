@@ -47,6 +47,8 @@ public class Microprocesador {
 	 * Este atributo representa el display led que se actualiza
 	 */
 	private int out;
+	
+	private int velocidad;
 
 	public Microprocesador() {
 		super();
@@ -289,6 +291,14 @@ public class Microprocesador {
 
 	public int getOut() {
 		return out;
+	}
+
+	public void setVelocidad(int velocidad) {
+		this.velocidad = velocidad;	
+	}
+	
+	public int getVelocidad() {
+		return this.velocidad;	
 	}
 
 }

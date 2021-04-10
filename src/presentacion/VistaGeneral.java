@@ -16,13 +16,13 @@ public class VistaGeneral extends JFrame {
 	 * Este atributo establece la comunicación con el controlador correspondiente.
 	 */
 	private ControlVistaGeneral control;
-	
+
 	/**
 	 * Este atributo establece la comunicación con el modelo.
 	 */
 	private final Modelo modelo;
-	
-	//atributos donde se almacenan el estado de los componenteses	
+
+	// atributos donde se almacenan el estado de los componenteses
 	private JLabel lblPC;
 	private JLabel lblMAR;
 	private JButton btnRAM;
@@ -43,7 +43,7 @@ public class VistaGeneral extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Modelo modelo1 = new Modelo();					
+					Modelo modelo1 = new Modelo();
 					VistaGeneral frame = new VistaGeneral(modelo1);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -52,22 +52,22 @@ public class VistaGeneral extends JFrame {
 			}
 		});
 	}
-	
-    /** Creates new form CarritoAnimacion */
-    public VistaGeneral(Modelo aThis) {
-        modelo = aThis;
-        initComponents();
-        capturaEventos();
-    }  
-    
-	public ControlVistaGeneral getControl() {
-		if(control == null){
-            control = new ControlVistaGeneral(this);
-        }
-        return control;
+
+	/** Creates new form CarritoAnimacion */
+	public VistaGeneral(Modelo aThis) {
+		modelo = aThis;
+		initComponents();
+		capturaEventos();
 	}
-	
-	public Modelo getModelo() {		
+
+	public ControlVistaGeneral getControl() {
+		if (control == null) {
+			control = new ControlVistaGeneral(this);
+		}
+		return control;
+	}
+
+	public Modelo getModelo() {
 		return this.modelo;
 	}
 
@@ -79,85 +79,86 @@ public class VistaGeneral extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setBounds(100, 100, 470, 400);
-					
+
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setContentPane(contentPane);
-		
+
 		lblPC = new JLabel("0 0 0 0");
 		lblPC.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblPC.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPC.setBounds(35, 15, 125, 45);
-		
+
 		lblMAR = new JLabel("0 0 0 0");
 		lblMAR.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblMAR.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMAR.setBounds(35, 80, 125, 45);
-		
+
 		btnRAM = new JButton("0 0 0 0 0 0 0 0");
 		btnRAM.setBorder(UIManager.getBorder("Tree.editorBorder"));
-		btnRAM.setBounds(35, 145,125, 45);
-		
+		btnRAM.setBounds(35, 145, 125, 45);
+
 		lblRI = new JLabel("0 0 0 0 0 0 0 0");
 		lblRI.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblRI.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRI.setBounds(35, 210, 125, 45);
-				
+
 		lblCS = new JLabel("INSTRUCCION");
 		lblCS.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblCS.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCS.setBounds(35, 275, 125, 45);
-		
+
 		lblAcumulador = new JLabel("0 0 0 0 0 0 0 0");
 		lblAcumulador.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAcumulador.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblAcumulador.setBounds(310, 15, 125, 45);
-		
+
 		lblALU = new JLabel("000 + 000 = 000");
 		lblALU.setHorizontalAlignment(SwingConstants.CENTER);
 		lblALU.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblALU.setBounds(310, 80, 125, 45);
-		
+
 		lblRegistroB = new JLabel("0 0 0 0 0 0 0 0 0");
 		lblRegistroB.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistroB.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblRegistroB.setBounds(310, 145, 125, 45);
-						
+
 		lblOUT = new JLabel("OUT: 000");
 		lblOUT.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOUT.setBorder(UIManager.getBorder("Tree.editorBorder"));
-		lblOUT.setBounds(310, 210, 125, 45);		
-		
+		lblOUT.setBounds(310, 210, 125, 45);
+
 		slider = new JSlider();
 		slider.setBounds(310, 334, 132, 26);
-		
-		
+
 		btnPausar = new JButton("||");
-		btnPausar.setBounds(390, 275, 45, 34);		
-		
+		btnPausar.setBounds(390, 275, 45, 34);
+
 		btnPlay = new JButton(">");
-		btnPlay.setBounds(310, 275, 45, 34);		
-				
+		btnPlay.setBounds(310, 275, 45, 34);
+
 		contentPane.setLayout(null);
-		contentPane.add(lblRI);				
+		contentPane.add(lblRI);
 		contentPane.add(lblPC);
 		contentPane.add(lblMAR);
-		contentPane.add(btnRAM);			
+		contentPane.add(btnRAM);
 		contentPane.add(lblRI);
-		contentPane.add(lblCS);		
-		contentPane.add(lblAcumulador);				
-		contentPane.add(lblALU);				
-		contentPane.add(lblRegistroB);		
-		contentPane.add(lblOUT);		
+		contentPane.add(lblCS);
+		contentPane.add(lblAcumulador);
+		contentPane.add(lblALU);
+		contentPane.add(lblRegistroB);
+		contentPane.add(lblOUT);
 		contentPane.add(btnPlay);
 		contentPane.add(btnPausar);
 		contentPane.add(slider);
 	}
-	
-	public void capturaEventos() {
-		
-	}
 
+	public void capturaEventos() {
+		btnPlay.addActionListener(getControl());
+		btnPausar.addActionListener(getControl());
+		slider.addChangeListener(getControl());
+		this.addComponentListener(getControl());
+	}
 
 	public JLabel getLblPC() {
 		return lblPC;

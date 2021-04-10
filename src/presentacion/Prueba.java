@@ -8,9 +8,12 @@ public class Prueba {
 		String palabra = "";
 		model.getSistema();
 		model.cargarProgramaDefecto(1);
+		model.iniciarAnimacion();
+		/*
 		while(!palabra.equals("HLT")){			
 			palabra = model.ciclo();
 		}
+		*/
 	}
 
 }
