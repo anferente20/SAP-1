@@ -66,7 +66,7 @@ public class Microprocesador {
 	 * binaria
 	 * 
 	 * @param valor numero decimal
-	 * @param tamano tamaño del arreglo resultante
+	 * @param tamano tamaï¿½o del arreglo resultante
 	 * @return rta representacion binaria en arreglo
 	 */
 	public int[] toBinario(int valor, int tamano) {
@@ -124,7 +124,10 @@ public class Microprocesador {
 		}
 		
 	}
-
+	
+	public void setOut(int out) {
+		this.out = out;
+	}
 
 	/**
 	 * Este mÃ©todo permite cargar un programa en la RAM
