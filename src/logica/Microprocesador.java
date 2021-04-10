@@ -131,6 +131,7 @@ public class Microprocesador {
 	 */
 	public void cargarPrograma(int programa) {
 		this.ram.cargarProgramaDefecto(programa);
+		this.cs.cargarVersion(programa);
 	}
 
 	/**

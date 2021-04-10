@@ -112,7 +112,7 @@ public class Modelo implements Runnable {
 		this.sistema.cargarPrograma(programa);
 	}
 	
-	public String ciclo() {
+	public String ciclo() {		
 		//asigna la instruccion al mar
 		sistema.setInstruccionMAR(sistema.getInstruccionPC());
 		sistema.aumentarPC();
@@ -120,14 +120,18 @@ public class Modelo implements Runnable {
 		int[] instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
 		//Asigna la instruccion a IR
 		String palabra = sistema.traducir(sistema.toDecimal(sistema.usarRI(instruccion,1), 0, 3));
-		int[] datoRegistro = sistema.usarRI(instruccion,2);
-		System.out.println(palabra);
+		int[] datoRegistro = sistema.usarRI(instruccion,2);		
 		switch(palabra) {
 			case "LDA":
 				//Asigna la instruccion al MAR
 				sistema.setInstruccionMAR(datoRegistro);
 				//Busca la posición en la ram
-				instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());	
+				instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
+				System.out.print("LDA: ");
+				for (int i : datoRegistro) {
+					System.out.print(i);	
+				}
+				System.out.println("");				
 				sistema.asignarAcumuladorA(instruccion);
 				break;
 			case "ADD":
@@ -136,7 +140,7 @@ public class Modelo implements Runnable {
 				instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());	
 				sistema.asignarRegistroB(instruccion);
 				int suma = sistema.sumarDecimal(sistema.valorDecimalAcumulador(),sistema.valorDecimalRegistro());
-				System.out.println(suma);				
+				System.out.println("resultado ADD: "+suma);				
 				sistema.asignarAcumuladorA(sistema.toBinario(suma, 8));					
 				break;
 			case "SUB":
@@ -144,7 +148,8 @@ public class Modelo implements Runnable {
 				//Busca la posición en la ram
 				instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());	
 				sistema.asignarRegistroB(instruccion);
-				int resta = sistema.restarDecimal(sistema.valorDecimalAcumulador(),sistema.valorDecimalRegistro());				
+				int resta = sistema.restarDecimal(sistema.valorDecimalAcumulador(),sistema.valorDecimalRegistro());
+				System.out.println("resultado SUB: "+resta);			
 				sistema.asignarAcumuladorA(sistema.toBinario(resta, 8));									
 				break;
 			case "STA":

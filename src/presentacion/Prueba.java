@@ -7,7 +7,7 @@ public class Prueba {
 		Modelo model = new Modelo();
 		String palabra = "";
 		model.getSistema();
-		model.cargarProgramaDefecto(2);
+		model.cargarProgramaDefecto(1);
 		while(!palabra.equals("HLT")){			
 			palabra = model.ciclo();
 		}
