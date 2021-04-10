@@ -190,7 +190,7 @@ public class Microprocesador {
 	 * @param datos arreglo de datos binarios
 	 * @return rta instruccion y dato
 	 */
-	public int[] usarRI(int[] datos, int pos) {
+	public int[] extraerSeccion(int[] datos, int pos) {
 		int[] rta = new int[4];
 		if (pos == 1) {
 			for (int i = 0; i < 4; i++) {
@@ -229,6 +229,10 @@ public class Microprocesador {
 
 	public void asignarAcumuladorA(int[] numero) {
 		this.acumuladorA.setDatos(numero);
+	}
+	
+	public void asignarRegistroI(int[] numero) {
+		this.registroInstruccion.setDatos(numero);
 	}
 
 	public void asignarPC(int[] posicion) {

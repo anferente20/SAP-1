@@ -42,19 +42,22 @@ public class Modelo implements Runnable {
 	}
 
 	public void iniciarAnimacion() {
-		setVelocidad(110 - getVentanaGeneral().getSlider().getValue());
-		System.out.println(110 - getVentanaGeneral().getSlider().getValue());
+		setVelocidad(110 - getVentanaGeneral().getSlider().getValue());		
 		getVentanaGeneral().getBtnPlay().setEnabled(false);
 		getVentanaGeneral().getBtnPausar().setEnabled(true);
-		hiloDibujo = new Thread(this);
-		hiloDibujo.start();
+		if(hiloDibujo == null) {
+			hiloDibujo = new Thread(this);
+			hiloDibujo.start();
+		}else {
+			hiloDibujo.resume();			
+		}
+				
 	}
-
-	public void detenerAnimacion() {
+	
+	public void detenerAnimacion() throws InterruptedException {
 		getVentanaGeneral().getBtnPlay().setEnabled(true);
-		getVentanaGeneral().getBtnPausar().setEnabled(false);
-		animando = false;
-		hiloDibujo = null;
+		getVentanaGeneral().getBtnPausar().setEnabled(false);		
+		hiloDibujo.suspend();
 		System.gc();
 	}
 
@@ -63,12 +66,10 @@ public class Modelo implements Runnable {
 		animando = true;
 		String palabra = "";
 		getSistema();
-		cargarProgramaDefecto(1);
-					
+		cargarProgramaDefecto(2); // sacarlo de ah�				
 		while (!palabra.equals("HLT")) {
 			palabra = ciclo();
-		}
-		
+		}		
 
 	}
 
@@ -116,14 +117,28 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getSlider().setMaximum(100);
 
 		getVentanaGeneral().getLblPC().setText("0 0 0 0");
+		int[] datos = new int[4];
+		for (int i = 0; i < datos.length; i++) {
+			datos[i] = 0;
+		}
+		this.sistema.getProgramCounter().setDatos(datos);
 		getVentanaGeneral().getLblMAR().setText("0 0 0 0");
-		getVentanaGeneral().getBtnRAM().setText("0 0 0 0 0 0 0 0");
+		this.sistema.getMar().setDatos(datos);		
+		getVentanaGeneral().getBtnRAM().setText("0 0 0 0 0 0 0 0");		
+		datos = new int[8];
+		for (int i = 0; i < datos.length; i++) {
+			datos[i] = 0;
+		}		
 		getVentanaGeneral().getLblRI().setText("0 0 0 0 0 0 0 0");
+		this.sistema.getRegistroInstruccion().setDatos(datos);
 		getVentanaGeneral().getLblCS().setText("");
 		getVentanaGeneral().getLblAcumulador().setText("0 0 0 0 0 0 0 0");
+		this.sistema.getAcumuladorA().setDatos(datos);
 		getVentanaGeneral().getLblALU().setText("");
 		getVentanaGeneral().getLblRegistroB().setText("0 0 0 0 0 0 0 0");
+		this.sistema.getRegistroB().setDatos(datos);
 		getVentanaGeneral().getLblOUT().setText("");
+		this.sistema.setOut(0);
 	}
 
 	public int getVelocidad() {
@@ -141,53 +156,72 @@ public class Modelo implements Runnable {
 	}
 
 	public String ciclo() {
+		String palabra ="";
 		// asigna la instruccion al mar
 		sistema.setInstruccionMAR(sistema.getInstruccionPC());
 		this.esperar(this.getVelocidad());
+		this.actualizarEstadosComponentes(palabra);
 		sistema.aumentarPC();
 		this.esperar(this.getVelocidad());
+		this.actualizarEstadosComponentes(palabra);
 		// Busca la posición en la ram
 		int[] instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
 		this.esperar(this.getVelocidad());
+		this.actualizarEstadosComponentes(palabra);
 		// Asigna la instruccion a IR
-		String palabra = sistema.traducir(sistema.toDecimal(sistema.usarRI(instruccion, 1), 0, 3));
+		sistema.asignarRegistroI(instruccion);
+		palabra = sistema.traducir(sistema.toDecimal(sistema.extraerSeccion(instruccion, 1), 0, 3));
 		this.esperar(this.getVelocidad());
-		int[] datoRegistro = sistema.usarRI(instruccion, 2);
+		this.actualizarEstadosComponentes(palabra);
+		int[] datoRegistro = sistema.extraerSeccion(instruccion, 2);
 		this.esperar(this.getVelocidad());
+		this.actualizarEstadosComponentes(palabra);
 		switch (palabra) {
 		case "LDA":
 			// Asigna la instruccion al MAR
 			sistema.setInstruccionMAR(datoRegistro);
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			// Busca la posición en la ram
 			instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			sistema.asignarAcumuladorA(instruccion);
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			break;
 		case "ADD":
 			sistema.setInstruccionMAR(datoRegistro);
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			// Busca la posición en la ram
 			instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			sistema.asignarRegistroB(instruccion);
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			int suma = sistema.sumarDecimal(sistema.valorDecimalAcumulador(), sistema.valorDecimalRegistro());
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			sistema.asignarAcumuladorA(sistema.toBinario(suma, 8));
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			break;
 		case "SUB":
 			sistema.setInstruccionMAR(datoRegistro);
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			// Busca la posición en la ram
 			instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			sistema.asignarRegistroB(instruccion);
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			int resta = sistema.restarDecimal(sistema.valorDecimalAcumulador(), sistema.valorDecimalRegistro());
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			sistema.asignarAcumuladorA(sistema.toBinario(resta, 8));
 			this.esperar(this.getVelocidad());
 			break;
@@ -195,29 +229,34 @@ public class Modelo implements Runnable {
 			sistema.setInstruccionMAR(datoRegistro);
 			// Se busca la posicion para guardar en la ram
 			int posicion = sistema.toDecimal(datoRegistro, 0, datoRegistro.length - 1);
-			sistema.setRegistroRAM(posicion, sistema.obtenerValorAcumulador());
+			sistema.setRegistroRAM(posicion, sistema.obtenerValorAcumulador());			
 			break;
 		case "LDI":
 			// Asigna la instruccion al MAR
 			sistema.setInstruccionMAR(datoRegistro);
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			sistema.asignarAcumuladorA(datoRegistro);
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			break;
 		case "JMP":
 			sistema.asignarPC(datoRegistro);
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			break;
 		case "JC":
 			if (sistema.valorDecimalAcumulador() >= 0) {
 				sistema.asignarPC(datoRegistro);
 				this.esperar(this.getVelocidad());
+				this.actualizarEstadosComponentes(palabra);
 			}
 			break;
 		case "JZ":
 			if (sistema.valorDecimalAcumulador() == 0) {
 				sistema.asignarPC(datoRegistro);
 				this.esperar(this.getVelocidad());
+				this.actualizarEstadosComponentes(palabra);
 			}
 			break;
 		case "HLT":
@@ -225,6 +264,7 @@ public class Modelo implements Runnable {
 		case "OUT":
 			sistema.setOut(sistema.valorDecimalAcumulador());
 			this.esperar(this.getVelocidad());
+			this.actualizarEstadosComponentes(palabra);
 			System.out.println("El resultado es: " + sistema.valorDecimalAcumulador());
 			break;
 		}
@@ -237,4 +277,40 @@ public class Modelo implements Runnable {
 		ventanaRAM = new VistaRAM(this);		
 		ventanaRAM.setVisible(true);
 	}
+	
+	void actualizarEstadosComponentes(String palabra) {
+		String texto = "";
+		for (int i : this.sistema.getProgramCounter().getDatos()) {
+			texto += " "+i;
+		}
+		this.ventanaGeneral.getLblPC().setText(texto);
+		
+		texto = "";
+		for (int i : this.sistema.getMar().getDatos()) {
+			texto += " "+i;
+		}
+		this.ventanaGeneral.getLblMAR().setText(texto);
+		
+		texto = "";
+		for (int i : this.sistema.getRegistroInstruccion().getDatos()) {
+			texto += " "+i;
+		}
+		this.ventanaGeneral.getLblRI().setText(texto);
+		
+		texto = "";
+		for (int i : this.sistema.getAcumuladorA().getDatos()) {
+			texto += " "+i;
+		}
+		this.ventanaGeneral.getLblAcumulador().setText(texto);
+		
+		texto = "";
+		for (int i : this.sistema.getRegistroB().getDatos()) {
+			texto += " "+i;
+		}
+		this.ventanaGeneral.getLblRegistroB().setText(texto);
+		this.ventanaGeneral.getLblCS().setText(palabra);
+		this.ventanaGeneral.getLblOUT().setText(""+this.sistema.getOut());
+	}
+
+
 }

@@ -53,7 +53,12 @@ public class ControlVistaGeneral implements ActionListener, ComponentListener, C
             if (boton == ventanaGeneral.getBtnPlay()) {
                 getModelo().iniciarAnimacion();
             } else if (boton == ventanaGeneral.getBtnPausar()){
-                getModelo().detenerAnimacion();
+                try {
+					getModelo().detenerAnimacion();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             } else {
             	getModelo().modificarRAM();
             }        
