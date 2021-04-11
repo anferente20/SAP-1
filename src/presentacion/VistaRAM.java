@@ -74,9 +74,10 @@ public class VistaRAM extends JFrame {
 		ramButtons = new JButton[16][8];
 		x = 80;
 		y = 40;
+		int[][] aux = getModelo().getSistema().getRam().getDatos();
 		for(int i=0;i<16;i++) {
 			for(int j =0;j<8;j++) {
-				ramButtons[i][j]  = new JButton("0");
+				ramButtons[i][j]  = new JButton(String.valueOf(aux[i][j]));
 				ramButtons[i][j].setBounds(x,y,50,30);
 				contentPane.add(ramButtons[i][j]);
 				x+=55;
