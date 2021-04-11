@@ -52,6 +52,16 @@ public class Microprocesador {
 	 * Este atributo permite controlar la velocidad del hilo
 	 */
 	private int velocidad;
+	
+	/**
+	 * Este atributo permite almacenar el registro leido actualmente en la RAM
+	 */
+	private int[] lecturaRam;
+	
+	/**
+	 * Este atributo permite guardar la ultima operacion de la ALU
+	 */
+	private String operacionALU;
 
 	/*
 	 * Constructor SAP-1
@@ -61,6 +71,7 @@ public class Microprocesador {
 		this.registroInstruccion = new Registro(8);
 		this.programCounter = new PC(4);
 		this.ram = new RAM(16, 8);
+		this.lecturaRam = new int[8];
 		this.mar = new Registro(4);
 		this.acumuladorA = new Registro(8);
 		this.alu = new ALU();
@@ -195,7 +206,8 @@ public class Microprocesador {
 	 * @return instruccion almacenada en la RAM
 	 */
 	public int[] buscarInstruccioRAM(int[] ubicacion) {
-		return this.ram.buscarInstruccion(ubicacion);
+		this.lecturaRam = this.ram.buscarInstruccion(ubicacion); 
+		return this.lecturaRam;
 	}
 
 	/**
@@ -227,11 +239,15 @@ public class Microprocesador {
 	}
 
 	public int sumarDecimal(int acumulador, int registroB) {
-		return this.alu.sumar(acumulador, registroB);
+		int resultado = this.alu.sumar(acumulador, registroB);
+		this.operacionALU = acumulador+" + "+registroB +" = " +resultado;
+		return resultado;
 	}
 
 	public int restarDecimal(int acumulador, int registroB) {
-		return this.alu.restar(acumulador, registroB);
+		int resultado = this.alu.restar(acumulador, registroB);
+		this.operacionALU = acumulador+" - "+registroB +" = " +resultado;
+		return resultado;
 	}
 
 	public int valorDecimalAcumulador() {
@@ -322,6 +338,14 @@ public class Microprocesador {
 	
 	public int getVelocidad() {
 		return this.velocidad;	
+	}
+
+	public int[] getLecturaRam() {
+		return lecturaRam;
+	}
+
+	public String getOperacionALU() {
+		return operacionALU;
 	}
 
 }

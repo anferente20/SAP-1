@@ -80,6 +80,7 @@ public class RAM {
 	}
 
 	public void setDatos(int[][] datos) {
+		restaurarRAM();
 		this.datos = datos;
 	}
 	

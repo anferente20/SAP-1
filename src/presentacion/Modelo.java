@@ -1,5 +1,7 @@
 package presentacion;
 
+import javax.swing.JButton;
+
 import logica.Microprocesador;
 
 public class Modelo implements Runnable {
@@ -58,6 +60,7 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getBtnPlay().setEnabled(true);
 		getVentanaGeneral().getBtnPausar().setEnabled(false);
 		getVentanaGeneral().getBtnReiniciar().setEnabled(true);
+		getVentanaGeneral().getBtnRAM().setEnabled(false);
 		hiloDibujo.suspend();
 		System.gc();
 	}
@@ -66,6 +69,7 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getBtnPlay().setEnabled(true);
 		getVentanaGeneral().getBtnPausar().setEnabled(true);
 		getVentanaGeneral().getBtnReiniciar().setEnabled(false);
+		getVentanaGeneral().getBtnRAM().setEnabled(true);
 		this.restablecerComponentes();
         animando = false;
         hiloDibujo = null;        
@@ -76,11 +80,12 @@ public class Modelo implements Runnable {
 	private void animar() throws Exception {
 		animando = true;
 		String palabra = "";
-		getSistema();					
+		getSistema();
+		getVentanaGeneral().getBtnRAM().setEnabled(false);
 		while (!palabra.equals("HLT")) {
 			palabra = ciclo();
 		}		
-
+		
 	}
 
 	public boolean isAnimando() {
@@ -106,9 +111,11 @@ public class Modelo implements Runnable {
 		} catch (Exception ex) {
 			// mensaje de error
 		}
-		getVentanaGeneral().getBtnPlay().setEnabled(true);
+		getVentanaGeneral().getBtnPlay().setEnabled(false);
 		getVentanaGeneral().getBtnPausar().setEnabled(false);
-		getVentanaGeneral().getBtnReiniciar().setEnabled(false);
+		getVentanaGeneral().getBtnReiniciar().setEnabled(true);
+		getVentanaGeneral().getBtnRAM().setEnabled(false);
+		
 	}
 
 	/**
@@ -130,9 +137,14 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getLblRI().setText("0 0 0 0 0 0 0 0");
 		getVentanaGeneral().getLblCS().setText("");
 		getVentanaGeneral().getLblAcumulador().setText("0 0 0 0 0 0 0 0");
+		getVentanaGeneral().getLblALU().setText("");
 		getVentanaGeneral().getLblRegistroB().setText("0 0 0 0 0 0 0 0");
 		getVentanaGeneral().getLblOUT().setText("");
+		int [][] temp = sistema.obtenerRAM();
 		sistema = null;
+		sistema = getSistema();
+		sistema.cargarProgramaRAM(temp);
+		
 	}
 
 	public int getVelocidad() {
@@ -262,8 +274,7 @@ public class Modelo implements Runnable {
 			this.actualizarEstadosComponentes(palabra);
 			System.out.println("El resultado es: " + sistema.valorDecimalAcumulador());
 			break;
-		}
-		System.out.println("----------------------------------------------------------------------");
+		}		
 		return palabra;
 	}
 
@@ -303,6 +314,14 @@ public class Modelo implements Runnable {
 			texto += " "+i;
 		}
 		this.ventanaGeneral.getLblRegistroB().setText(texto);
+		
+		texto = "";
+		for (int i : this.sistema.getLecturaRam()) {
+			texto += " "+i;
+		}
+		this.ventanaGeneral.getBtnRAM().setText(texto);
+		
+		this.ventanaGeneral.getLblALU().setText(this.sistema.getOperacionALU());				
 		this.ventanaGeneral.getLblCS().setText(palabra);
 		this.ventanaGeneral.getLblOUT().setText(""+this.sistema.getOut());
 	}
