@@ -20,7 +20,8 @@ public class VistaRAM extends JFrame {
     private JButton btnBorrar;
     private JButton btnCargar;    
     private JButton[][] ramButtons;
-		
+	
+    /*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -33,7 +34,7 @@ public class VistaRAM extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 	
 	public VistaRAM(Modelo modelo) {		
 		this.modelo = modelo;

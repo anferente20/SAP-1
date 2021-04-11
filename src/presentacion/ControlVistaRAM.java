@@ -26,7 +26,8 @@ public class ControlVistaRAM implements ActionListener, ComponentListener, Chang
 			JButton boton = (JButton) arg0.getSource();
 			if (boton == ventanaRAM.getBtnAceptar()) {
 				ventanaRAM.dispose();
-			} else if (boton == ventanaRAM.getBtnBorrar()) {
+				this.setMemoria();
+			} else if (boton == ventanaRAM.getBtnBorrar()) {				
 				for(int i =0;i<16;i++) {
 	        		for(int j = 0;j<8;j++) {
 	        			ventanaRAM.getRamButtons()[i][j].setText("0");
@@ -112,5 +113,19 @@ public class ControlVistaRAM implements ActionListener, ComponentListener, Chang
 
 	public Modelo getModelo() {
 		return modelo;
+	}
+	
+	public void setMemoria() {
+		System.out.println("SET MEMORIA:");
+		JButton[][] ramButtons = ventanaRAM.getRamButtons();
+		int[][] memoria = new int[ramButtons.length][ramButtons[0].length];
+		for(int i =0;i<ramButtons.length;i++) {
+    		for(int j = 0;j<ramButtons[i].length;j++) {
+    			memoria[i][j]= Integer.parseInt(ramButtons[i][j].getText());
+    			System.out.print(memoria[i][j]);
+    		}
+    		System.out.println("");
+		}
+		getModelo().getSistema().cargarProgramaRAM(memoria);
 	}
 }

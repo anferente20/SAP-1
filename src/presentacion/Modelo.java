@@ -12,6 +12,7 @@ public class Modelo implements Runnable {
 	private VistaGeneral ventanaGeneral;
 	private VistaRAM ventanaRAM;
 	private Thread hiloDibujo;
+	private int[][] memoria;
 
 	// Metodos ocultacion de informacion
 
@@ -21,12 +22,36 @@ public class Modelo implements Runnable {
 		}
 		return sistema;
 	}
+	
+	public void reiniciarSistema() {		
+		getVentanaGeneral().getSlider().setMinimum(10);
+		getVentanaGeneral().getSlider().setMaximum(100);		
+		getVentanaGeneral().getLblPC().setText("0 0 0 0");			
+		getVentanaGeneral().getLblMAR().setText("0 0 0 0");
+		getVentanaGeneral().getBtnRAM().setText("0 0 0 0 0 0 0 0");
+		getVentanaGeneral().getLblRI().setText("0 0 0 0 0 0 0 0");
+		getVentanaGeneral().getLblCS().setText("");
+		getVentanaGeneral().getLblAcumulador().setText("0 0 0 0 0 0 0 0");
+		getVentanaGeneral().getLblALU().setText("");
+		getVentanaGeneral().getLblRegistroB().setText("0 0 0 0 0 0 0 0");
+		getVentanaGeneral().getLblOUT().setText("");		
+		sistema = null;	
+		getSistema();
+		sistema.cargarProgramaRAM(this.memoria);
+	}
 
 	public VistaGeneral getVentanaGeneral() {
 		if (ventanaGeneral == null) {
 			ventanaGeneral = new VistaGeneral(this);
 		}
 		return ventanaGeneral;
+	}
+	
+	public VistaRAM getVentanaRAM() {
+		if (ventanaRAM == null) {
+			ventanaRAM = new VistaRAM(this);
+		}
+		return ventanaRAM;
 	}
 
 	// M�todos Punto de vista funcional
@@ -61,6 +86,7 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getBtnPausar().setEnabled(false);
 		getVentanaGeneral().getBtnReiniciar().setEnabled(true);
 		getVentanaGeneral().getBtnRAM().setEnabled(false);
+		animando = false;
 		hiloDibujo.suspend();
 		System.gc();
 	}
@@ -70,7 +96,7 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getBtnPausar().setEnabled(true);
 		getVentanaGeneral().getBtnReiniciar().setEnabled(false);
 		getVentanaGeneral().getBtnRAM().setEnabled(true);
-		this.restablecerComponentes();
+		this.reiniciarSistema();
         animando = false;
         hiloDibujo = null;        
 		System.gc();
@@ -79,8 +105,8 @@ public class Modelo implements Runnable {
 	// Metodos correspondientes a la logica de presentacion
 	private void animar() throws Exception {
 		animando = true;
-		String palabra = "";
-		getSistema();
+		String palabra = "";		
+		getSistema();				
 		getVentanaGeneral().getBtnRAM().setEnabled(false);
 		while (!palabra.equals("HLT")) {
 			palabra = ciclo();
@@ -106,8 +132,8 @@ public class Modelo implements Runnable {
 
 	@Override
 	public void run() {
-		try {
-			animar();			
+		try {			
+			animar();
 		} catch (Exception ex) {
 			// mensaje de error
 		}
@@ -125,26 +151,6 @@ public class Modelo implements Runnable {
 	 */
 	public void setVelocidad(int i) {
 		getSistema().setVelocidad(i);
-	}
-
-	public void restablecerComponentes() {		
-		getVentanaGeneral().getSlider().setMinimum(10);
-		getVentanaGeneral().getSlider().setMaximum(100);		
-		getVentanaGeneral().getLblPC().setText("0 0 0 0");
-				
-		getVentanaGeneral().getLblMAR().setText("0 0 0 0");
-		getVentanaGeneral().getBtnRAM().setText("0 0 0 0 0 0 0 0");
-		getVentanaGeneral().getLblRI().setText("0 0 0 0 0 0 0 0");
-		getVentanaGeneral().getLblCS().setText("");
-		getVentanaGeneral().getLblAcumulador().setText("0 0 0 0 0 0 0 0");
-		getVentanaGeneral().getLblALU().setText("");
-		getVentanaGeneral().getLblRegistroB().setText("0 0 0 0 0 0 0 0");
-		getVentanaGeneral().getLblOUT().setText("");
-		int [][] temp = sistema.obtenerRAM();
-		sistema = null;
-		sistema = getSistema();
-		sistema.cargarProgramaRAM(temp);
-		
 	}
 
 	public int getVelocidad() {
@@ -326,5 +332,12 @@ public class Modelo implements Runnable {
 		this.ventanaGeneral.getLblOUT().setText(""+this.sistema.getOut());
 	}
 
+	public int[][] getMemoria() {
+		return memoria;
+	}
+
+	public void setMemoria(int[][] memoria) {		
+		this.memoria = memoria;
+	}
 
 }

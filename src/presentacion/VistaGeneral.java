@@ -37,9 +37,7 @@ public class VistaGeneral extends JFrame {
 	private JButton btnPlay;
 	private JButton btnReiniciar;
 
-	/**
-	 * Launch the application.
-	 */
+	/*	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,6 +51,7 @@ public class VistaGeneral extends JFrame {
 			}
 		});
 	}
+	*/
 
 	/** Creates new form CarritoAnimacion */
 	public VistaGeneral(Modelo aThis) {
