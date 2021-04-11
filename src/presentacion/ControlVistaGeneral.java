@@ -11,9 +11,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class ControlVistaGeneral implements ActionListener, ComponentListener, ChangeListener {
-    
+
 	private final VistaGeneral ventanaGeneral;
-    private final Modelo modelo;
+	private final Modelo modelo;
 
 	public ControlVistaGeneral(VistaGeneral ventana) {
 		this.ventanaGeneral = ventana;
@@ -23,57 +23,63 @@ public class ControlVistaGeneral implements ActionListener, ComponentListener, C
 	@Override
 	public void componentHidden(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void componentMoved(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void componentResized(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void componentShown(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-        int respuesta;
-        if (arg0.getSource() instanceof JButton) {
-            JButton boton = (JButton) arg0.getSource();
-
-            if (boton == ventanaGeneral.getBtnPlay()) {
-                getModelo().iniciarAnimacion();
-            } else if (boton == ventanaGeneral.getBtnPausar()){
-                try {
+		int respuesta;
+		if (arg0.getSource() instanceof JButton) {
+			JButton boton = (JButton) arg0.getSource();
+			if (boton == ventanaGeneral.getBtnPlay()) {
+				getModelo().iniciarAnimacion();
+			} else if (boton == ventanaGeneral.getBtnReiniciar()) {
+				try {					
+					getModelo().reiniciarAnimacion();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (boton == ventanaGeneral.getBtnPausar()) {
+				try {
 					getModelo().detenerAnimacion();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-            } else {
-            	getModelo().modificarRAM();
-            }        
-        }else {        
-        }
-		
+			} else {
+				getModelo().modificarRAM();
+			}
+		} else {
+		}
+
 	}
 
 	@Override
 	public void stateChanged(ChangeEvent arg0) {
 		getModelo().controlarVelocidad();
-		
+
 	}
 
-    public Modelo getModelo() {
-        return modelo;
-    }
+	public Modelo getModelo() {
+		return modelo;
+	}
 }

@@ -35,6 +35,7 @@ public class VistaGeneral extends JFrame {
 	private JSlider slider;
 	private JButton btnPausar;
 	private JButton btnPlay;
+	private JButton btnReiniciar;
 
 	/**
 	 * Launch the application.
@@ -78,7 +79,8 @@ public class VistaGeneral extends JFrame {
 		this.setTitle("Vista General");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		this.setBounds(100, 100, 470, 400);
+		this.setBounds(100, 100, 480, 445);
+		
 
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -129,13 +131,17 @@ public class VistaGeneral extends JFrame {
 		lblOUT.setBounds(310, 210, 125, 45);
 
 		slider = new JSlider();
-		slider.setBounds(310, 334, 132, 26);
+		slider.setBounds(35, 364, 222, 26);
 
 		btnPausar = new JButton("||");
-		btnPausar.setBounds(390, 275, 45, 34);
+		btnPausar.setBounds(335, 364, 45, 35);
 
 		btnPlay = new JButton(">");
-		btnPlay.setBounds(310, 275, 45, 34);
+		btnPlay.setBounds(280, 364, 45, 35);
+		
+		btnReiniciar = new JButton("X");
+		btnReiniciar.setBounds(390, 364, 45, 35);
+		btnReiniciar.setEnabled(false);
 
 		contentPane.setLayout(null);
 		contentPane.add(lblRI);
@@ -150,12 +156,14 @@ public class VistaGeneral extends JFrame {
 		contentPane.add(lblOUT);
 		contentPane.add(btnPlay);
 		contentPane.add(btnPausar);
+		contentPane.add(btnReiniciar);
 		contentPane.add(slider);
 	}
 
 	public void capturaEventos() {
 		btnPlay.addActionListener(getControl());
 		btnPausar.addActionListener(getControl());
+		btnReiniciar.addActionListener(getControl());
 		slider.addChangeListener(getControl());
 		this.addComponentListener(getControl());
 	}
@@ -254,6 +262,14 @@ public class VistaGeneral extends JFrame {
 
 	public void setBtnPlay(JButton btnPlay) {
 		this.btnPlay = btnPlay;
+	}
+
+	public JButton getBtnReiniciar() {
+		return btnReiniciar;
+	}
+
+	public void setBtnReiniciar(JButton btnReiniciar) {
+		this.btnReiniciar = btnReiniciar;
 	}
 
 }

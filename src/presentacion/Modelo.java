@@ -11,7 +11,7 @@ public class Modelo implements Runnable {
 	private VistaRAM ventanaRAM;
 	private Thread hiloDibujo;
 
-	// M�todos ocultaci�n de informaci�n
+	// Metodos ocultacion de informacion
 
 	public Microprocesador getSistema() {
 		if (sistema == null) {
@@ -56,8 +56,19 @@ public class Modelo implements Runnable {
 	
 	public void detenerAnimacion() throws InterruptedException {
 		getVentanaGeneral().getBtnPlay().setEnabled(true);
-		getVentanaGeneral().getBtnPausar().setEnabled(false);		
+		getVentanaGeneral().getBtnPausar().setEnabled(false);
+		getVentanaGeneral().getBtnReiniciar().setEnabled(true);
 		hiloDibujo.suspend();
+		System.gc();
+	}
+	
+	public void reiniciarAnimacion() throws InterruptedException {		
+		getVentanaGeneral().getBtnPlay().setEnabled(true);
+		getVentanaGeneral().getBtnPausar().setEnabled(true);
+		getVentanaGeneral().getBtnReiniciar().setEnabled(false);
+		this.restablecerComponentes();
+        animando = false;
+        hiloDibujo = null;        
 		System.gc();
 	}
 
@@ -98,6 +109,7 @@ public class Modelo implements Runnable {
 		}
 		getVentanaGeneral().getBtnPlay().setEnabled(true);
 		getVentanaGeneral().getBtnPausar().setEnabled(false);
+		getVentanaGeneral().getBtnReiniciar().setEnabled(false);
 
 	}
 
@@ -110,35 +122,19 @@ public class Modelo implements Runnable {
 		getSistema().setVelocidad(i);
 	}
 
-	public void restablecerComponentes() {
-		getVentanaGeneral().getBtnPlay().setEnabled(true);
-		getVentanaGeneral().getBtnPausar().setEnabled(false);
+	public void restablecerComponentes() {		
 		getVentanaGeneral().getSlider().setMinimum(10);
-		getVentanaGeneral().getSlider().setMaximum(100);
-
+		getVentanaGeneral().getSlider().setMaximum(100);		
 		getVentanaGeneral().getLblPC().setText("0 0 0 0");
-		int[] datos = new int[4];
-		for (int i = 0; i < datos.length; i++) {
-			datos[i] = 0;
-		}
-		this.sistema.getProgramCounter().setDatos(datos);
+				
 		getVentanaGeneral().getLblMAR().setText("0 0 0 0");
-		this.sistema.getMar().setDatos(datos);		
-		getVentanaGeneral().getBtnRAM().setText("0 0 0 0 0 0 0 0");		
-		datos = new int[8];
-		for (int i = 0; i < datos.length; i++) {
-			datos[i] = 0;
-		}		
+		getVentanaGeneral().getBtnRAM().setText("0 0 0 0 0 0 0 0");
 		getVentanaGeneral().getLblRI().setText("0 0 0 0 0 0 0 0");
-		this.sistema.getRegistroInstruccion().setDatos(datos);
 		getVentanaGeneral().getLblCS().setText("");
 		getVentanaGeneral().getLblAcumulador().setText("0 0 0 0 0 0 0 0");
-		this.sistema.getAcumuladorA().setDatos(datos);
-		getVentanaGeneral().getLblALU().setText("");
 		getVentanaGeneral().getLblRegistroB().setText("0 0 0 0 0 0 0 0");
-		this.sistema.getRegistroB().setDatos(datos);
 		getVentanaGeneral().getLblOUT().setText("");
-		this.sistema.setOut(0);
+		sistema = null;
 	}
 
 	public int getVelocidad() {
