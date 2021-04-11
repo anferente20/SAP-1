@@ -76,8 +76,7 @@ public class Modelo implements Runnable {
 	private void animar() throws Exception {
 		animando = true;
 		String palabra = "";
-		getSistema();
-		cargarProgramaDefecto(2); // sacarlo de ahí				
+		getSistema();					
 		while (!palabra.equals("HLT")) {
 			palabra = ciclo();
 		}		
@@ -146,7 +145,8 @@ public class Modelo implements Runnable {
 		setVelocidad(110 - getVentanaGeneral().getSlider().getValue());
 	}
 
-	public void cargarProgramaDefecto(int programa) {
+	public void cargarProgramaDefecto(int programa) {		
+		getSistema();		
 		this.sistema.cargarPrograma(programa);
 	}
 

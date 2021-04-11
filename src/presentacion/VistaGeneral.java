@@ -164,6 +164,7 @@ public class VistaGeneral extends JFrame {
 		btnPlay.addActionListener(getControl());
 		btnPausar.addActionListener(getControl());
 		btnReiniciar.addActionListener(getControl());
+		btnRAM.addActionListener(getControl());
 		slider.addChangeListener(getControl());
 		this.addComponentListener(getControl());
 	}

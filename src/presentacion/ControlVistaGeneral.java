@@ -45,8 +45,7 @@ public class ControlVistaGeneral implements ActionListener, ComponentListener, C
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		int respuesta;
+	public void actionPerformed(ActionEvent arg0) {		
 		if (arg0.getSource() instanceof JButton) {
 			JButton boton = (JButton) arg0.getSource();
 			if (boton == ventanaGeneral.getBtnPlay()) {
