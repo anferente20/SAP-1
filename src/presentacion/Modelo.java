@@ -110,7 +110,6 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getBtnPlay().setEnabled(true);
 		getVentanaGeneral().getBtnPausar().setEnabled(false);
 		getVentanaGeneral().getBtnReiniciar().setEnabled(false);
-
 	}
 
 	/**
