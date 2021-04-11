@@ -33,15 +33,42 @@ public class ControlVistaRAM implements ActionListener, ComponentListener, Chang
 		        Integer i = (Integer) JOptionPane.showOptionDialog(null,   
 		                null,  "ShowInputDialog",   
 		                JOptionPane.PLAIN_MESSAGE, 1,  null, possibilities, 0);
-		        System.out.println("sdsadasdasd:"+i);
 		        if (i==0) {
-		        	getModelo().cargarProgramaDefecto(1);	
+		        	getModelo().cargarProgramaDefecto(1);
 		        }else {
 		        	getModelo().cargarProgramaDefecto(2);
 		        }
+		        int[][] aux = getModelo().getSistema().getRam().getDatos();
+	        	for(int in =0;in<16;in++) {
+	        		for(int j = 0;j<8;j++) {
+	        			ventanaRAM.getRamButtons()[in][j].setText(String.valueOf(aux[in][j]));
+	        		}
+	        	}
 				
 			} else {
-				//matriz botones
+				getModelo().getSistema().getRam().mostrarDatos();
+				int x = 0;
+				for(int in =0;in<16;in++) {
+	        		for(int j = 0;j<8;j++) {
+	        			if (boton == ventanaRAM.getRamButtons()[in][j]) {
+	        				x = in;
+	        				if(ventanaRAM.getRamButtons()[in][j].getText().equals("0")) {
+	        					ventanaRAM.getRamButtons()[in][j].setText("1");
+	        				}else {
+	        					ventanaRAM.getRamButtons()[in][j].setText("0");
+	        				}
+	        			}
+	        		}
+	        	}
+				//Conseguimos la línea de de la ram modificada
+				int[] aux = new int[8];
+				for(int i =0;i<8;i++) {
+					aux[i] = Integer.valueOf(ventanaRAM.getRamButtons()[x][i].getText());
+				}
+				System.out.println("-------------------------------------------------------");
+				getModelo().getSistema().getRam().setRegistro(x, aux);
+				getModelo().getSistema().getRam().mostrarDatos();
+				
 			}
 		} else {
 		}

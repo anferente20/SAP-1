@@ -19,6 +19,7 @@ public class VistaRAM extends JFrame {
     private JButton btnAceptar;
     private JButton btnBorrar;
     private JButton btnCargar;    
+    private JButton[][] ramButtons;
 		
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -54,7 +55,7 @@ public class VistaRAM extends JFrame {
 		JLabel[] filas = new JLabel[16];
 		
 		for(int i=0;i<columnas.length;i++) {
-			columnas[i] = new JLabel(String.valueOf(i+1));
+			columnas[i] = new JLabel(String.valueOf(i));
 			columnas[i].setBounds(x,y,50,30);
 			columnas[i].setHorizontalAlignment(SwingConstants.CENTER);
 			contentPane.add(columnas[i]);
@@ -63,13 +64,13 @@ public class VistaRAM extends JFrame {
 		x=50;
 		y=40;
 		for(int i=0;i<filas.length;i++) {
-			filas[i] = new JLabel(String.valueOf(i+1));
+			filas[i] = new JLabel(String.valueOf(i));
 			filas[i].setBounds(x,y,50,30);
 			contentPane.add(filas[i]);
 			y+=35;
 		}
 		
-		JButton[][] ramButtons = new JButton[16][8];
+		ramButtons = new JButton[16][8];
 		x = 80;
 		y = 40;
 		for(int i=0;i<16;i++) {
@@ -102,11 +103,30 @@ public class VistaRAM extends JFrame {
         return control;
     }
 	
-	private void capturaEventos() {        
+	private void capturaEventos() { 
+    	for(int i =0;i<16;i++) {
+    		for(int j = 0;j<8;j++) {
+    			ramButtons[i][j].addActionListener(getControl());
+    		}
+    	}
         btnAceptar.addActionListener(getControl());
         btnBorrar.addActionListener(getControl());        
         btnCargar.addActionListener(getControl());           
     }
+
+	/**
+	 * @return the ramButtons
+	 */
+	public JButton[][] getRamButtons() {
+		return ramButtons;
+	}
+
+	/**
+	 * @param ramButtons the ramButtons to set
+	 */
+	public void setRamButtons(JButton[][] ramButtons) {
+		this.ramButtons = ramButtons;
+	}
 
 	public JTable getTable() {
 		return table;
