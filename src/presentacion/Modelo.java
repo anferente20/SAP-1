@@ -1,6 +1,7 @@
 package presentacion;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import logica.Microprocesador;
 
@@ -36,8 +37,7 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getLblRegistroB().setText("0 0 0 0 0 0 0 0");
 		getVentanaGeneral().getLblOUT().setText("");		
 		sistema = null;	
-		getSistema();
-		sistema.cargarProgramaRAM(this.memoria);
+		//getSistema().cargarProgramaRAM(this.getMemoria());
 	}
 
 	public VistaGeneral getVentanaGeneral() {
@@ -97,14 +97,14 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getBtnReiniciar().setEnabled(false);
 		getVentanaGeneral().getBtnRAM().setEnabled(true);
 		this.reiniciarSistema();
-        animando = false;
+        animando = false; 
         hiloDibujo = null;        
 		System.gc();
 	}
 
 	// Metodos correspondientes a la logica de presentacion
 	private void animar() throws Exception {
-		animando = true;
+		animando = true;		
 		String palabra = "";		
 		getSistema();				
 		getVentanaGeneral().getBtnRAM().setEnabled(false);
@@ -333,11 +333,16 @@ public class Modelo implements Runnable {
 	}
 
 	public int[][] getMemoria() {
-		return memoria;
+		if (this.memoria == null) {
+			this.memoria = new int[16][8];
+			return this.memoria;
+		}else {
+			return this.memoria;
+		}
+		
 	}
 
 	public void setMemoria(int[][] memoria) {		
 		this.memoria = memoria;
 	}
-
 }

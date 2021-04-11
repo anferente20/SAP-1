@@ -91,4 +91,15 @@ public class RAM {
 			}
 		}	
 	}
+	
+	public boolean isEmpty() {
+		boolean bandera = true;
+		for(int i = 0; i<this.datos.length;i++) {			
+			for(int j=0;j<this.datos[i].length;j++) {
+				if (this.datos[i][j] != 0)
+					bandera = false;
+			}
+		}
+		return bandera;
+	}
 }

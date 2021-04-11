@@ -347,5 +347,9 @@ public class Microprocesador {
 	public String getOperacionALU() {
 		return operacionALU;
 	}
+	
+	public boolean isEmptyRam() {
+		return this.ram.isEmpty();
+	}
 
 }
