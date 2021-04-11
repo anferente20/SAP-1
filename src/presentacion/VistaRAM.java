@@ -1,12 +1,9 @@
 package presentacion;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -20,21 +17,7 @@ public class VistaRAM extends JFrame {
     private JButton btnBorrar;
     private JButton btnCargar;    
     private JButton[][] ramButtons;
-	
-    /*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Modelo modelo1 = new Modelo();
-					VistaRAM frame = new VistaRAM(modelo1);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+
 	
 	public VistaRAM(Modelo modelo) {		
 		this.modelo = modelo;
@@ -45,6 +28,7 @@ public class VistaRAM extends JFrame {
 	public void initComponents() {
 		setBounds(600, 100, 600, 700);
 		setTitle("RAM");
+		this.setResizable(false);
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

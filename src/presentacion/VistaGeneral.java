@@ -1,6 +1,5 @@
 package presentacion;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -37,21 +36,6 @@ public class VistaGeneral extends JFrame {
 	private JButton btnPlay;
 	private JButton btnReiniciar;
 
-	/*	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Modelo modelo1 = new Modelo();
-					VistaGeneral frame = new VistaGeneral(modelo1);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 
 	/** Creates new form CarritoAnimacion */
 	public VistaGeneral(Modelo aThis) {
@@ -78,7 +62,7 @@ public class VistaGeneral extends JFrame {
 		this.setTitle("Vista General");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		this.setBounds(100, 100, 480, 445);
+		this.setBounds(100, 100, 495, 455);
 		
 
 		JPanel contentPane = new JPanel();
@@ -88,26 +72,26 @@ public class VistaGeneral extends JFrame {
 		lblPC = new JLabel("0 0 0 0");
 		lblPC.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblPC.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPC.setBounds(35, 15, 125, 45);
+		lblPC.setBounds(45, 15, 125, 45);
 
 		lblMAR = new JLabel("0 0 0 0");
 		lblMAR.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblMAR.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMAR.setBounds(35, 80, 125, 45);
+		lblMAR.setBounds(45, 80, 125, 45);
 
 		btnRAM = new JButton("0 0 0 0 0 0 0 0");
 		btnRAM.setBorder(UIManager.getBorder("Tree.editorBorder"));
-		btnRAM.setBounds(35, 145, 125, 45);
+		btnRAM.setBounds(45, 145, 125, 45);
 
 		lblRI = new JLabel("0 0 0 0 0 0 0 0");
 		lblRI.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblRI.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRI.setBounds(35, 210, 125, 45);
+		lblRI.setBounds(45, 210, 125, 45);
 
 		lblCS = new JLabel("INSTRUCCION");
 		lblCS.setBorder(UIManager.getBorder("Tree.editorBorder"));
 		lblCS.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCS.setBounds(35, 275, 125, 45);
+		lblCS.setBounds(45, 275, 125, 45);
 
 		lblAcumulador = new JLabel("0 0 0 0 0 0 0 0");
 		lblAcumulador.setHorizontalAlignment(SwingConstants.CENTER);
@@ -134,13 +118,51 @@ public class VistaGeneral extends JFrame {
 
 		btnPausar = new JButton("||");
 		btnPausar.setBounds(335, 364, 45, 35);
+		btnPausar.setEnabled(false);
 
 		btnPlay = new JButton(">");
 		btnPlay.setBounds(280, 364, 45, 35);
+		btnPlay.setEnabled(false);
 		
 		btnReiniciar = new JButton("X");
 		btnReiniciar.setBounds(390, 364, 45, 35);
 		btnReiniciar.setEnabled(false);
+		
+		JLabel lblPC1 = new JLabel("PC");
+		lblPC1.setBounds(10, 30, 34, 14);
+		contentPane.add(lblPC1);
+		
+		JLabel lblMAR1 = new JLabel("MAR");
+		lblMAR1.setBounds(10, 95, 34, 14);
+		contentPane.add(lblMAR1);
+		
+		JLabel lblRAM1 = new JLabel("RAM");
+		lblRAM1.setBounds(10, 160, 34, 14);
+		contentPane.add(lblRAM1);
+		
+		JLabel lblRI1 = new JLabel("RI");
+		lblRI1.setBounds(10, 225, 34, 14);
+		contentPane.add(lblRI1);
+		
+		JLabel lblCS1 = new JLabel("CS");
+		lblCS1.setBounds(10, 290, 34, 14);
+		contentPane.add(lblCS1);
+		
+		JLabel lblPA1 = new JLabel("A");
+		lblPA1.setBounds(445, 30, 34, 14);
+		contentPane.add(lblPA1);
+		
+		JLabel lblALU1 = new JLabel("ALU");
+		lblALU1.setBounds(445, 95, 34, 14);
+		contentPane.add(lblALU1);
+		
+		JLabel lblB = new JLabel("B");
+		lblB.setBounds(445, 160, 34, 14);
+		contentPane.add(lblB);
+		
+		JLabel lblOUT1 = new JLabel("OUT");
+		lblOUT1.setBounds(445, 225, 34, 14);
+		contentPane.add(lblOUT1);
 
 		contentPane.setLayout(null);
 		contentPane.add(lblRI);

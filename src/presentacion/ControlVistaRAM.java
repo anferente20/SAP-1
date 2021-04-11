@@ -27,6 +27,7 @@ public class ControlVistaRAM implements ActionListener, ComponentListener, Chang
 			if (boton == ventanaRAM.getBtnAceptar()) {
 				ventanaRAM.dispose();
 				this.setMemoria();
+				this.modelo.getVentanaGeneral().getBtnPlay().setEnabled(true);
 			} else if (boton == ventanaRAM.getBtnBorrar()) {				
 				for(int i =0;i<16;i++) {
 	        		for(int j = 0;j<8;j++) {

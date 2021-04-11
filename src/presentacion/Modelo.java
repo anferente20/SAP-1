@@ -92,8 +92,8 @@ public class Modelo implements Runnable {
 	}
 	
 	public void reiniciarAnimacion() throws InterruptedException {		
-		getVentanaGeneral().getBtnPlay().setEnabled(true);
-		getVentanaGeneral().getBtnPausar().setEnabled(true);
+		getVentanaGeneral().getBtnPlay().setEnabled(false);
+		getVentanaGeneral().getBtnPausar().setEnabled(false);
 		getVentanaGeneral().getBtnReiniciar().setEnabled(false);
 		getVentanaGeneral().getBtnRAM().setEnabled(true);
 		this.reiniciarSistema();
