@@ -43,7 +43,7 @@ public class VistaRAM extends JFrame {
 	}
 	
 	public void initComponents() {
-		setBounds(150, 150, 600, 700);
+		setBounds(600, 100, 600, 700);
 		setTitle("RAM");
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
