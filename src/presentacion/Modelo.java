@@ -147,7 +147,7 @@ public class Modelo implements Runnable {
 
 	public void cargarProgramaDefecto(int programa) {		
 		getSistema();		
-		this.sistema.cargarPrograma(programa);
+		this.sistema.cargarProgramaDefecto(programa);
 	}
 
 	public String ciclo() {

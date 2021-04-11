@@ -40,13 +40,7 @@ public class RAM {
 	}
 	
 	public void cargarProgramaDefecto(int programa) {
-		System.out.println("RAM for 1:"+this.datos.length);
-		for(int i = 0; i<this.datos.length;i++) {
-			System.out.println("RAM for 2:"+this.datos[i].length);
-			for(int j=0;j<this.datos[i].length;j++) {
-				this.datos[i][j] = 0;
-			}
-		}		
+		this.restaurarRAM();
 		if(programa == 1) {
 			this.datos[0][4] = 1; this.datos[2][3] = 1; this.datos[3][4] = 1; this.datos[5][0] = 1; this.datos[10][3] = 1;
 			this.datos[0][7] = 1; this.datos[2][4] = 1; this.datos[3][5] = 1; this.datos[5][1] = 1; this.datos[10][5] = 1;
@@ -79,5 +73,21 @@ public class RAM {
 			}
 			System.out.println();
 		}
+	}
+
+	public int[][] getDatos() {
+		return datos;
+	}
+
+	public void setDatos(int[][] datos) {
+		this.datos = datos;
+	}
+	
+	public void restaurarRAM() {
+		for(int i = 0; i<this.datos.length;i++) {			
+			for(int j=0;j<this.datos[i].length;j++) {
+				this.datos[i][j] = 0;
+			}
+		}	
 	}
 }

@@ -48,8 +48,14 @@ public class Microprocesador {
 	 */
 	private int out;
 	
+	/**
+	 * Este atributo permite controlar la velocidad del hilo
+	 */
 	private int velocidad;
 
+	/*
+	 * Constructor SAP-1
+	 * */
 	public Microprocesador() {
 		super();
 		this.registroInstruccion = new Registro(8);
@@ -127,28 +133,38 @@ public class Microprocesador {
 		
 	}
 	
-	public void setOut(int out) {
-		this.out = out;
-	}
-
 	/**
-	 * Este método permite cargar un programa en la RAM
+	 * Este metodo permite cargar un programa por defecto en la RAM
 	 */
-	public void cargarPrograma(int programa) {
+	public void cargarProgramaDefecto(int programa) {
 		this.ram.cargarProgramaDefecto(programa);
 		this.cs.cargarVersion(programa);
 	}
-
+	
 	/**
-	 * Este método permite restaurar la memoria RAM y eliminar cualquier programa
+	 * Este metodo permite restaurar la memoria RAM y eliminar cualquier programa
 	 * cargado
 	 */
-	public void restaurar() {
-
+	public void restaurarRAM() {
+		this.ram.restaurarRAM();
+	}
+	
+	/**
+	 * Este metodo permite obtener los datos cargados en la RAM 
+	 */
+	public int[][] obtenerRAM() {
+		return this.ram.getDatos();
+	}
+	
+	/**
+	 * Este metodo permite cargar un programa en la RAM y eliminar	 * 
+	 */
+	public void cargarProgramaRAM(int[][] datosRAM) {
+		this.ram.setDatos(datosRAM);
 	}
 
 	/**
-	 * Este método obtiene la instrucción a ejecutar del programCounter
+	 * Este metodo obtiene la instruccion a ejecutar del programCounter
 	 * 
 	 * @return arreglo que indica la instrucción a ejecutar.
 	 */
@@ -157,7 +173,7 @@ public class Microprocesador {
 	}
 
 	/**
-	 * Este método permite asignarle una instruccion al registro MAR
+	 * Este metodo permite asignarle una instruccion al registro MAR
 	 * 
 	 * @param instruccion Instruccion a registrar
 	 */
@@ -166,18 +182,17 @@ public class Microprocesador {
 	}
 
 	/**
-	 * Este método permite aumentar el contador del Program Counter
+	 * Este metodo permite aumentar el contador del Program Counter
 	 */
 	public void aumentarPC() {
 		this.programCounter.aumentar();
 	}
 
 	/**
-	 * Este método busca una instrucción específica en la RAM y devuelve la
-	 * instrucción específicada
+	 * Este metodo busca un registro especifico de la RAM
 	 * 
 	 * @param ubicacion ubicacion a buscar la instruccion
-	 * @return instrucción almacenada en la RAM
+	 * @return instruccion almacenada en la RAM
 	 */
 	public int[] buscarInstruccioRAM(int[] ubicacion) {
 		return this.ram.buscarInstruccion(ubicacion);
@@ -292,7 +307,11 @@ public class Microprocesador {
 	public ControlSecuencia getCs() {
 		return cs;
 	}
-
+	
+	public void setOut(int out) {
+		this.out = out;
+	}
+	
 	public int getOut() {
 		return out;
 	}
