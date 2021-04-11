@@ -25,9 +25,14 @@ public class ControlVistaRAM implements ActionListener, ComponentListener, Chang
 		if (arg0.getSource() instanceof JButton) {
 			JButton boton = (JButton) arg0.getSource();
 			if (boton == ventanaRAM.getBtnAceptar()) {
-				// getModelo().cargarRAM();
+				ventanaRAM.dispose();
 			} else if (boton == ventanaRAM.getBtnBorrar()) {
-				// getModelo().borrarRAM();
+				for(int i =0;i<16;i++) {
+	        		for(int j = 0;j<8;j++) {
+	        			ventanaRAM.getRamButtons()[i][j].setText("0");
+	        		}
+	        	}
+				getModelo().getSistema().restaurarRAM();
 			} else if (boton == ventanaRAM.getBtnCargar()) {				
 				Object[] possibilities = {"1 - Profesor Serrano", "2 - Profesor Oswaldo"};  
 		        Integer i = (Integer) JOptionPane.showOptionDialog(null,   
