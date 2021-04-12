@@ -32,9 +32,10 @@ public class RAM {
 	}
 	
 	public int[] buscarInstruccion(int[] ubicacion) {
+		int [] temp = ubicacion; 
 		int valor = 0;
-		for(int i =0;i<ubicacion.length;i++) {
-			valor += ubicacion[i]*Math.pow(2, 3-i);
+		for(int i =0;i<temp.length;i++) {
+			valor += temp[i]*Math.pow(2, 3-i);
 		}
 		return getInstruccion(valor);
 	}
@@ -57,15 +58,21 @@ public class RAM {
 			this.datos[7][5] = 1; this.datos[7][7] = 1; this.datos[8][2] = 1; this.datos[8][4] = 1; this.datos[8][5] = 1;
 			this.datos[8][7] = 1; this.datos[8][6] = 1; this.datos[9][1] = 1; this.datos[9][4] = 1; this.datos[9][5] = 1;
 			this.datos[9][7] = 1; this.datos[10][1] = 1; this.datos[10][2] = 1; this.datos[12][7] = 1; this.datos[14][5] = 1;
-			this.datos[14][7] = 1; this.datos[15][6] = 1; this.datos[15][7] = 1; 
+			this.datos[14][7] = 1; this.datos[15][6] = 1; this.datos[15][7] = 1;			
 		}
 	}
 	
+	
 	public void setRegistro(int posicion, int[] instruccion) {
+		String registro = "";
+		for (int i = 0; i < instruccion.length; i++) {
+			registro += " "+instruccion[i];
+		}		
 		for(int i=0;i<instruccion.length;i++) {
-			this.datos[posicion][i] = instruccion[i];
-		}
+			this.datos[posicion][i] = instruccion[i];			
+		}				
 	}
+	
 	public void mostrarDatos() {
 		for(int i = 0;i<tamMemoria;i++) {
 			for(int j=0;j<8;j++) {

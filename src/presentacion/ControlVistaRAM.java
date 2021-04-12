@@ -73,7 +73,7 @@ public class ControlVistaRAM implements ActionListener, ComponentListener, Chang
 					aux[i] = Integer.valueOf(ventanaRAM.getRamButtons()[x][i].getText());
 				}
 				System.out.println("-------------------------------------------------------");
-				getModelo().getSistema().getRam().setRegistro(x, aux);
+				getModelo().getSistema().setRegistroRAM(x, aux);
 				getModelo().getSistema().getRam().mostrarDatos();
 				
 			}

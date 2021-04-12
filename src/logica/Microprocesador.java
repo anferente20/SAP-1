@@ -125,15 +125,13 @@ public class Microprocesador {
 	 * @return rta representacion decimal
 	 */
 	public int toDecimal(int[] datos, int inicio, int fin) {
-		String resultado = "";
-		if (fin > datos.length) {
-			fin = datos.length;
-		}				
+		String resultado = "";				
 		if(datos.length == 8 && datos[0] == 1) {
 			datos[0] = 0;
 			for (int i = inicio; i <= fin; i++) {
 				resultado += datos[i];
 			}
+			datos[0] = 1;
 			return -Integer.parseInt(resultado, 2);			
 		}else {
 			for (int i = inicio; i <= fin; i++) {
@@ -251,11 +249,11 @@ public class Microprocesador {
 	}
 
 	public int valorDecimalAcumulador() {
-		return toDecimal(this.acumuladorA.getDatos(), 0, this.acumuladorA.getNumBits() - 1);
+		return toDecimal(this.acumuladorA.getDatos(), 0, this.acumuladorA.getNumBits() -1);
 	}
 
 	public int valorDecimalRegistro() {
-		return toDecimal(this.registroB.getDatos(), 0, this.registroB.getNumBits() - 1);
+		return toDecimal(this.registroB.getDatos(), 0, this.registroB.getNumBits() -1);
 	}
 
 	public void asignarAcumuladorA(int[] numero) {
@@ -285,7 +283,7 @@ public class Microprocesador {
 	public String traducir(int instruccion) {
 		return this.cs.traducir(instruccion);
 	}
-
+	
 	public void setRegistroRAM(int posicion, int[] instruccion) {
 		this.ram.setRegistro(posicion, instruccion);
 	}

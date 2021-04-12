@@ -204,20 +204,39 @@ public class Modelo implements Runnable {
 			this.actualizarEstadosComponentes(palabra);
 			break;
 		case "ADD":
-			sistema.setInstruccionMAR(datoRegistro);
+			int [] tempC = datoRegistro;
+			sistema.setInstruccionMAR(tempC);
 			this.esperar(this.getVelocidad());
 			this.actualizarEstadosComponentes(palabra);
+			
 			// Busca la posición en la ram
-			instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
+			int [] tempB = sistema.getMar().getDatos();
+			instruccion = sistema.buscarInstruccioRAM(tempB);
 			this.esperar(this.getVelocidad());
 			this.actualizarEstadosComponentes(palabra);
+			
+			
 			sistema.asignarRegistroB(instruccion);
 			this.esperar(this.getVelocidad());
 			this.actualizarEstadosComponentes(palabra);
-			int suma = sistema.sumarDecimal(sistema.valorDecimalAcumulador(), sistema.valorDecimalRegistro());
+						
+			int a = sistema.valorDecimalAcumulador();		
+			sistema.printRAM();
+			
+			
+			int b = sistema.valorDecimalRegistro();
+			sistema.printRAM();
+						
+			
+			int suma = sistema.sumarDecimal(a, b);
+			sistema.printRAM();
+			
 			this.esperar(this.getVelocidad());
 			this.actualizarEstadosComponentes(palabra);
-			sistema.asignarAcumuladorA(sistema.toBinario(suma, 8));
+			sistema.printRAM();
+			
+			int [] tempA = sistema.toBinario(suma, 8);
+			sistema.asignarAcumuladorA(tempA);
 			this.esperar(this.getVelocidad());
 			this.actualizarEstadosComponentes(palabra);
 			break;
@@ -225,16 +244,20 @@ public class Modelo implements Runnable {
 			sistema.setInstruccionMAR(datoRegistro);
 			this.esperar(this.getVelocidad());
 			this.actualizarEstadosComponentes(palabra);
+			
 			// Busca la posición en la ram
 			instruccion = sistema.buscarInstruccioRAM(sistema.getMar().getDatos());
 			this.esperar(this.getVelocidad());
 			this.actualizarEstadosComponentes(palabra);
+			
 			sistema.asignarRegistroB(instruccion);
 			this.esperar(this.getVelocidad());
 			this.actualizarEstadosComponentes(palabra);
+			
 			int resta = sistema.restarDecimal(sistema.valorDecimalAcumulador(), sistema.valorDecimalRegistro());
 			this.esperar(this.getVelocidad());
 			this.actualizarEstadosComponentes(palabra);
+			
 			sistema.asignarAcumuladorA(sistema.toBinario(resta, 8));
 			this.esperar(this.getVelocidad());
 			break;
@@ -280,7 +303,7 @@ public class Modelo implements Runnable {
 			this.actualizarEstadosComponentes(palabra);
 			System.out.println("El resultado es: " + sistema.valorDecimalAcumulador());
 			break;
-		}		
+		}						
 		return palabra;
 	}
 
