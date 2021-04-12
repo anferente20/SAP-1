@@ -72,7 +72,7 @@ public class RAM {
 			this.datos[posicion][i] = instruccion[i];			
 		}				
 	}
-	
+		
 	public void mostrarDatos() {
 		for(int i = 0;i<tamMemoria;i++) {
 			for(int j=0;j<8;j++) {

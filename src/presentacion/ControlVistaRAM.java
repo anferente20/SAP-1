@@ -52,8 +52,7 @@ public class ControlVistaRAM implements ActionListener, ComponentListener, Chang
 	        		}
 	        	}
 				
-			} else {
-				getModelo().getSistema().getRam().mostrarDatos();
+			} else {				
 				int x = 0;
 				for(int in =0;in<16;in++) {
 	        		for(int j = 0;j<8;j++) {
@@ -71,10 +70,8 @@ public class ControlVistaRAM implements ActionListener, ComponentListener, Chang
 				int[] aux = new int[8];
 				for(int i =0;i<8;i++) {
 					aux[i] = Integer.valueOf(ventanaRAM.getRamButtons()[x][i].getText());
-				}
-				System.out.println("-------------------------------------------------------");
-				getModelo().getSistema().setRegistroRAM(x, aux);
-				getModelo().getSistema().getRam().mostrarDatos();
+				}				
+				getModelo().getSistema().setRegistroRAM(x, aux);				
 				
 			}
 		} else {
@@ -116,18 +113,15 @@ public class ControlVistaRAM implements ActionListener, ComponentListener, Chang
 		return modelo;
 	}
 	
-	public void setMemoria() {
-		System.out.println("SET MEMORIA:");
+	public void setMemoria() {		
 		JButton[][] ramButtons = ventanaRAM.getRamButtons();
 		int[][] memoria = new int[ramButtons.length][ramButtons[0].length];
 		for(int i =0;i<ramButtons.length;i++) {
     		for(int j = 0;j<ramButtons[i].length;j++) {
-    			memoria[i][j]= Integer.parseInt(ramButtons[i][j].getText());
-    			System.out.print(memoria[i][j]);
-    		}
-    		System.out.println("");
+    			memoria[i][j]= Integer.parseInt(ramButtons[i][j].getText());    			
+    		}    		
 		}
 		getModelo().setMemoria(memoria);
-		getModelo().getSistema().cargarProgramaRAM(memoria);
+		getModelo().getSistema().cargarProgramaRAM(memoria);		
 	}
 }

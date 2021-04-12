@@ -232,9 +232,9 @@ public class Microprocesador {
 	}
 	
 	// otros metodos de acceso a funciones de los componentes
-	public void printRAM() {
+	/*public void printRAM() {
 		this.ram.mostrarDatos();
-	}
+	}*/
 
 	public int sumarDecimal(int acumulador, int registroB) {
 		int resultado = this.alu.sumar(acumulador, registroB);
