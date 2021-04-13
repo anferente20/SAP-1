@@ -82,7 +82,7 @@ public class Microprocesador {
 	
 	/**
 	 * Permite convertir un decimal en un arreglo de enteros {1,0} en representacion
-	 * binaria
+	 * binaria, primer bit representa el signo
 	 * 
 	 * @param valor numero decimal
 	 * @param tamano tama�o del arreglo resultante
@@ -211,7 +211,6 @@ public class Microprocesador {
 
 	/**
 	 * la unidad de control recibe la instruccion encontrada en la RAM
-	 * posteriormente
 	 * 
 	 * @param datos arreglo de datos binarios
 	 * @return rta instruccion y dato
@@ -350,5 +349,4 @@ public class Microprocesador {
 	public boolean isEmptyRam() {
 		return this.ram.isEmpty();
 	}
-
 }

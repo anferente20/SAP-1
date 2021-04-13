@@ -32,6 +32,7 @@ public class Registro {
 		return datos;
 	}
 
+	/*valida si es de 4 bits o de 8 bits*/
 	public void setDatos(int[] datos) {
 		if(datos.length == 4 && this.datos.length!= 4) {
 			int contador = 0;

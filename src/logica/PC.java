@@ -1,6 +1,9 @@
 package logica;
 
 public class PC extends Registro{
+	/*
+	 * Constructor
+	 * */
 	public PC(int numBits) {
 		super(numBits);
 		this.CE = false;
@@ -29,7 +32,7 @@ public class PC extends Registro{
 	
 	
 	/**
-	 * Este método permite aumentar la el CE de tal manera que se registre el paso en el que se va
+	 * Este metodo permite aumentar la el CE de tal manera que se registre el paso en el que se va
 	 */
 	public void aumentar() {
 		int acarreo = 0;
@@ -66,9 +69,5 @@ public class PC extends Registro{
 			}
 		}
 		this.setDatos(aux);
-	}
-
-	
-	
-	
+	}	
 }

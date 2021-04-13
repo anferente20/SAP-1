@@ -3,7 +3,7 @@ package logica;
 public class RAM {
 
 	/**
-	 * Este atributo determina el tamaño de la memoria RAM
+	 * Este atributo determina el tamano de la memoria RAM
 	 */
 	private int tamMemoria;
 	
@@ -12,6 +12,9 @@ public class RAM {
 	 */
 	private int[][] datos; 
 	
+	/*
+	 * Constructor para iniciar valores
+	 * */
 	public RAM(int tamMemoria, int numBits) {
 		this.tamMemoria = tamMemoria;
 		this.datos = new int[tamMemoria][numBits];
@@ -23,9 +26,9 @@ public class RAM {
 	}
 	
 	/**
-	 * Este método permite obtener la instrucción en una posición específica de la RAM
-	 * @param posicion posición de la instruccion
-	 * @return Entero correspondiente a la instrucción solicitada
+	 * Este metodo permite obtener la instruccion en una posicion especifica de la RAM
+	 * @param posicion posicion de la instruccion
+	 * @return Entero correspondiente a la instruccion solicitada
 	 */
 	private int[] getInstruccion(int posicion) {
 		return this.datos[posicion];

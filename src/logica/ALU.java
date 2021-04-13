@@ -3,7 +3,7 @@ package logica;
 public class ALU {
 
 	/**
-	 * Este método permite sumar los números del acumulador y el registro B, devolviendo su resultado
+	 * Este metodo permite sumar los numeros del acumulador y el registro B, devolviendo su resultado
 	 * @param acumulador Valor almacenado en el acumulador
 	 * @param registroB Valor almacenado en el registro B
 	 * @return el entero resultante de la suma
@@ -33,7 +33,7 @@ public class ALU {
 	}
 	
 	/**
-	 * Este método permite restar los números del acumulador y el registro B, devolviendo su resultado
+	 * Este metodo permite restar los numeros del acumulador y el registro B, devolviendo su resultado
 	 * @param acumulador Valor almacenado en el acumulador
 	 * @param registroB Valor almacenado en el registro B
 	 * @return el entero resultante de la resta
@@ -44,6 +44,13 @@ public class ALU {
 		return resultadoresta;
 	}
 	
+	
+	/**
+	 * Este metodo permite sumar los numeros del acumulador y el registro B, devolviendo su resultado
+	 * @param acumulador Valor almacenado en el acumulador
+	 * @param registroB Valor almacenado en el registro B
+	 * @return el entero resultante de la suma
+	 */
 	public int sumar(int acumulador, int registroB) {
 		int suma = acumulador+registroB;
 		if (suma >=-127 && suma <=127) {
@@ -54,6 +61,13 @@ public class ALU {
 		
 	}
 	
+	
+	/**
+	 * Este metodo permite restar los numeros del acumulador y el registro B, devolviendo su resultado
+	 * @param acumulador Valor almacenado en el acumulador
+	 * @param registroB Valor almacenado en el registro B
+	 * @return el entero resultante de la resta
+	 */
 	public int restar(int acumulador, int registroB) {
 		int resta = acumulador-registroB;
 		if (resta >=-127 && resta <=127) {

@@ -1,8 +1,5 @@
 package presentacion;
 
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
 import logica.Microprocesador;
 
 public class Modelo implements Runnable {
@@ -13,7 +10,6 @@ public class Modelo implements Runnable {
 	private VistaGeneral ventanaGeneral;
 	private VistaRAM ventanaRAM;
 	private Thread hiloDibujo;
-	//private int[][] memoria;
 
 	// Metodos ocultacion de informacion
 
@@ -37,7 +33,6 @@ public class Modelo implements Runnable {
 		getVentanaGeneral().getLblRegistroB().setText("0 0 0 0 0 0 0 0");
 		getVentanaGeneral().getLblOUT().setText("");		
 		sistema = null;	
-		//getSistema().cargarProgramaRAM(this.getMemoria());
 	}
 
 	public VistaGeneral getVentanaGeneral() {
@@ -339,19 +334,4 @@ public class Modelo implements Runnable {
 		this.ventanaGeneral.getLblCS().setText(palabra);
 		this.ventanaGeneral.getLblOUT().setText(""+this.sistema.getOut());
 	}
-
-	/*
-	public int[][] getMemoria() {
-		if (this.memoria == null) {
-			this.memoria = new int[16][8];
-			return this.memoria;
-		}else {
-			return this.memoria;
-		}
-		
-	}
-
-	public void setMemoria(int[][] memoria) {		
-		this.memoria = memoria;
-	}*/
 }

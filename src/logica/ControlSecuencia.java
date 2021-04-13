@@ -2,11 +2,13 @@ package logica;
 
 public class ControlSecuencia {
 
-	private int version;
+	//atributo usado para saber el registro de instrucciones a usar en la version anterior
+	//private int version;
 	
 	ControlSecuencia(){
-		this.version = 0;
+		//this.version = 0;
 	}
+	
 	/**
 	 * Permite traducir la instruccion con representacion decimal a la palabra en
 	 * lenguaje natural
