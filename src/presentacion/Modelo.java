@@ -12,7 +12,6 @@ public class Modelo implements Runnable {
 	private Thread hiloDibujo;
 
 	// Metodos ocultacion de informacion
-
 	public Microprocesador getSistema() {
 		if (sistema == null) {
 			sistema = new Microprocesador();
