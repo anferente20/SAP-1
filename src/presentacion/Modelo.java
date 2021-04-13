@@ -13,7 +13,7 @@ public class Modelo implements Runnable {
 	private VistaGeneral ventanaGeneral;
 	private VistaRAM ventanaRAM;
 	private Thread hiloDibujo;
-	private int[][] memoria;
+	//private int[][] memoria;
 
 	// Metodos ocultacion de informacion
 
@@ -340,6 +340,7 @@ public class Modelo implements Runnable {
 		this.ventanaGeneral.getLblOUT().setText(""+this.sistema.getOut());
 	}
 
+	/*
 	public int[][] getMemoria() {
 		if (this.memoria == null) {
 			this.memoria = new int[16][8];
@@ -352,5 +353,5 @@ public class Modelo implements Runnable {
 
 	public void setMemoria(int[][] memoria) {		
 		this.memoria = memoria;
-	}
+	}*/
 }

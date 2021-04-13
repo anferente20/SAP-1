@@ -147,7 +147,7 @@ public class Microprocesador {
 	 */
 	public void cargarProgramaDefecto(int programa) {
 		this.ram.cargarProgramaDefecto(programa);
-		this.cs.cargarVersion(programa);
+		//this.cs.cargarVersion(programa);
 	}
 	
 	/**
@@ -170,6 +170,7 @@ public class Microprocesador {
 	 */
 	public void cargarProgramaRAM(int[][] datosRAM) {
 		this.ram.setDatos(datosRAM);
+		//this.cs.cargarVersion(2);
 	}
 
 	/**

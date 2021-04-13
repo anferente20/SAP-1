@@ -121,7 +121,7 @@ public class ControlVistaRAM implements ActionListener, ComponentListener, Chang
     			memoria[i][j]= Integer.parseInt(ramButtons[i][j].getText());    			
     		}    		
 		}
-		getModelo().setMemoria(memoria);
+		//getModelo().setMemoria(memoria);		
 		getModelo().getSistema().cargarProgramaRAM(memoria);		
 	}
 }

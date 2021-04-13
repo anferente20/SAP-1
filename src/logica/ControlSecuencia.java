@@ -14,9 +14,10 @@ public class ControlSecuencia {
 	 * @param instruccion entero a traducir
 	 * @return String que corresponde a la palabra indicada
 	 */
-	public String traducir(int instruccion) {
+	public String traducir(int instruccion) {		
 		String respuesta = "";
-		if (this.version == 1) {
+		/*
+		if (this.version == 1) {			
 			switch (instruccion) {
 			case 0:
 				respuesta = "LDA";
@@ -36,7 +37,7 @@ public class ControlSecuencia {
 			}
 			return respuesta;
 
-		} else {
+		} else {*/
 			switch (instruccion) {
 			case 1:
 				respuesta = "LDA";
@@ -71,11 +72,13 @@ public class ControlSecuencia {
 
 			}
 			return respuesta;
-		}
+		//}
 	}
 
-	public void cargarVersion(int version) {
-		this.version = version;		
-	}
+	/*
+	public void cargarVersion(int version) {		
+		this.version = version;	
+		
+	}*/
 
 }

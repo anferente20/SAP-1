@@ -43,11 +43,42 @@ public class RAM {
 	public void cargarProgramaDefecto(int programa) {
 		this.restaurarRAM();
 		if(programa == 1) {
-			this.datos[0][4] = 1; this.datos[2][3] = 1; this.datos[3][4] = 1; this.datos[5][0] = 1; this.datos[10][3] = 1;
+			/*this.datos[0][4] = 1; this.datos[2][3] = 1; this.datos[3][4] = 1; this.datos[5][0] = 1; this.datos[10][3] = 1;
 			this.datos[0][7] = 1; this.datos[2][4] = 1; this.datos[3][5] = 1; this.datos[5][1] = 1; this.datos[10][5] = 1;
 			this.datos[1][3] = 1; this.datos[2][6] = 1; this.datos[4][0] = 1; this.datos[5][2] = 1; this.datos[11][3] = 1;
 			this.datos[1][4] = 1; this.datos[2][7] = 1; this.datos[4][1] = 1; this.datos[5][3] = 1; this.datos[11][4] = 1;
-			this.datos[1][6] = 1; this.datos[3][2] = 1; this.datos[4][2] = 1; this.datos[9][3] = 1; this.datos[12][2] = 1;
+			this.datos[1][6] = 1; this.datos[3][2] = 1; this.datos[4][2] = 1; this.datos[9][3] = 1; this.datos[12][2] = 1;*/
+			
+			this.datos[0][3] = 1;
+			this.datos[0][4] = 1;
+			this.datos[0][7] = 1;
+			
+			this.datos[1][2] = 1;			
+			this.datos[1][4] = 1;
+			this.datos[1][6] = 1;
+			
+			this.datos[2][2] = 1;			
+			this.datos[2][4] = 1;
+			this.datos[2][6] = 1;
+			this.datos[2][7] = 1;
+			
+			this.datos[3][2] = 1;
+			this.datos[3][3] = 1;
+			this.datos[3][4] = 1;
+			this.datos[3][5] = 1;
+			
+			this.datos[4][0] = 1;
+			this.datos[4][1] = 1;
+			this.datos[4][2] = 1;
+			 
+			this.datos[5][0] = 1; 
+			this.datos[5][1] = 1; 
+			this.datos[5][2] = 1; 
+			this.datos[5][3] = 1; 
+			  
+			this.datos[9][3] = 1;	this.datos[11][3] = 1;
+			this.datos[10][3] = 1;	this.datos[11][4] = 1;
+			this.datos[10][5] = 1;	this.datos[12][2] = 1;			
 		}else {
 			this.datos[0][3] = 1; this.datos[0][4] = 1; this.datos[0][5] = 1; this.datos[0][6] = 1; this.datos[1][2] = 1;
 			this.datos[1][3] = 1; this.datos[1][4] = 1; this.datos[1][5] = 1; this.datos[2][1] = 1; this.datos[2][2] = 1;
